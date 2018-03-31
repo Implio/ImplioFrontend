@@ -1,1 +1,9 @@
-@import "../node_modules/bulma/sass/utilities/initial-variables";
+@import '../node_modules/bulma/sass/utilities/initial-variables';
+
+$primary: #e9fafc;
+$primary-darker: #d6f5f9;
+
+$navbar-background-color: $primary;
+$navbar-item-hover-background-color: $primary-darker;
+$navbar-item-hover-color: $grey-dark;
+$navbar-dropdown-arrow: $grey-dark;
