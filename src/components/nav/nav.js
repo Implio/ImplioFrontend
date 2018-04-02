@@ -11,12 +11,13 @@ class Nav extends Component {
 				role="navigation"
 				aria-label="dropdown navigation"
 			>
+				<div className="navbar-brand">
+					<Link to="/dashboard" className="navbar-item">
+						<img src={logo} width="112" alt="logo" />
+					</Link>
+				</div>
 				<div className="navbar-menu">
 					<div className="navbar-start">
-						<Link to="/dashboard" className="navbar-item">
-							<img src={logo} width="112" alt="logo" />
-						</Link>
-
 						<Link to="/dashboard" className="navbar-item">
 							Dashboard
 						</Link>
