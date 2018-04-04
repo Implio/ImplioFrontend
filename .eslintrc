@@ -83,7 +83,7 @@
     //
     "block-scoped-var": 0, // treat var statements as if they were block scoped (off by default). 0: deep destructuring is not compatible https://github.com/eslint/eslint/issues/1863
     "complexity": 0, // specify the maximum cyclomatic complexity allowed in a program (off by default)
-    "consistent-return": 2, // require return statements to either always or never specify values
+    "consistent-return": 0, // require return statements to either always or never specify values
     "curly": 2, // specify curly brace conventions for all control statements
     "default-case": 2, // require default case in switch statements (off by default)
     "dot-notation": 2, // encourages use of dot notation whenever possible
@@ -151,7 +151,7 @@
     "no-undef-init": 2, // disallow use of undefined when initializing variables
     "no-undefined": 2, // disallow use of undefined variable (off by default)
     "no-unused-vars": 2, // disallow declaration of variables that are not used in the code
-    "no-use-before-define": 2, // disallow use of variables before they are defined
+    "no-use-before-define": 0, // disallow use of variables before they are defined
 
     //
     //Stylistic Issues
@@ -191,13 +191,13 @@
     "semi-spacing": [1, {"before": false, "after": true}], // enforce spacing before and after semicolons
     "sort-vars": 0, // sort variables within the same declaration block (off by default)
     "space-before-blocks": [1, "always"], // require or disallow space before blocks (off by default)
-    "space-before-function-paren": [1, {"anonymous": "always", "named": "never"}], // require or disallow space before function opening parenthesis (off by default)
+    "space-before-function-paren": 0, // require or disallow space before function opening parenthesis (off by default)
     "object-curly-spacing": [1, "always"], // require or disallow spaces inside brackets (off by default)
     "space-in-parens": [1, "never"], // require or disallow spaces inside parentheses (off by default)
     "space-infix-ops": ["error", {"int32Hint": false}], // require spaces around operators
     "keyword-spacing": [1, {"before": true}], // require a space after return, throw, and case
     "space-unary-ops": [1, {"words": true, "nonwords": false}], // Require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
-    "spaced-comment": [1, "always"], // require or disallow a space immediately following the // in a line comment (off by default)
+    "spaced-comment": 0, // require or disallow a space immediately following the // in a line comment (off by default)
     "wrap-regex": 0, // require regex literals to be wrapped in parentheses (off by default)
 
     //
