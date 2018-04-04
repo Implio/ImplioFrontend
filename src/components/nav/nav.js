@@ -1,46 +1,61 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-import logo from '../../img/logo.png';
+import logoIcon from '../../img/logo_icon.png';
 
 class Nav extends Component {
 	render() {
 		return (
 			<nav
-				className="navbar"
+				className="navbar has-shadow"
 				role="navigation"
 				aria-label="dropdown navigation"
 			>
 				<div className="navbar-brand">
-					<Link to="/dashboard" className="navbar-item">
-						<img src={logo} width="112" alt="logo" />
-					</Link>
+					<NavLink to="/dashboard" className="navbar-item">
+						<img src={logoIcon} alt="logo" />
+					</NavLink>
 				</div>
 				<div className="navbar-menu">
 					<div className="navbar-start">
-						<Link to="/dashboard" className="navbar-item">
+						<NavLink
+							to="/dashboard"
+							className="navbar-item is-tab"
+							activeClassName="is-active"
+						>
 							Dashboard
-						</Link>
-						<Link to="/patients" className="navbar-item">
+						</NavLink>
+						<NavLink
+							to="/patients"
+							className="navbar-item is-tab"
+							activeClassName="is-active"
+						>
 							Patients
-						</Link>
-						<Link to="/messages" className="navbar-item">
+						</NavLink>
+						<NavLink
+							to="/messages"
+							className="navbar-item is-tab"
+							activeClassName="is-active"
+						>
 							Messages
-						</Link>
+						</NavLink>
 
 						<div className="navbar-item has-dropdown is-hoverable">
 							<a className="navbar-link">Settings</a>
 
 							<div className="navbar-dropdown">
-								<Link to="/log-hours" className="navbar-item">
+								<NavLink
+									to="/log-hours"
+									className="navbar-item"
+								>
 									Log Hours
-								</Link>
-								<Link to="/schedule" className="navbar-item">
+								</NavLink>
+								<NavLink to="/schedule" className="navbar-item">
 									Schedule
-								</Link>
-								<Link to="/payments" className="navbar-item">
+								</NavLink>
+								<NavLink to="/payments" className="navbar-item">
 									Payments
-								</Link>
+								</NavLink>
 							</div>
 						</div>
 					</div>
