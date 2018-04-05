@@ -1,31 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Nav from './nav/nav.js';
+import LoginPage from './login/login';
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			isLoggedIn: false
-		};
-	}
-
 	render() {
-		if (!this.state.isLoggedIn) {
-			return (
-				<button
-					onClick={() => {
-						this.setState({
-							isLoggedIn: true
-						});
-					}}
-				>
-					Log In
-				</button>
-			);
-		}
+		if (!this.props.isLoggedIn) return <LoginPage />;
 
 		return (
 			<BrowserRouter>
@@ -49,4 +31,10 @@ class App extends Component {
 	}
 }
 
-export default App;
+function mapStateToProps(state) {
+	return {
+		isLoggedIn: state.auth.isLoggedIn,
+	};
+}
+
+export default connect(mapStateToProps)(App);

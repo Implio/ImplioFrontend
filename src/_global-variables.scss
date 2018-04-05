@@ -1,4 +1,11 @@
 @import '../node_modules/bulma/sass/utilities/initial-variables';
 
 $primary: #4dd9e5;
+$primary-light: #e9fafc;
+
 $link: $primary;
+
+$input-background-color: $primary-light;
+$input-shadow: 2px 2px 3px rgba(10, 10, 10, 0.1),
+	0 0 0 1px rgba(10, 10, 10, 0.1);
+$input-border-color: none;
