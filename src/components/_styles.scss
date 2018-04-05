@@ -1,1 +1,20 @@
 @import 'nav/styles';
+@import 'login/styles';
+
+html,
+body,
+.root {
+	height: 100%;
+	background-color: $primary-light;
+}
+
+.root * {
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+}
+
+.is-underlined {
+	text-decoration: underline;
+}
