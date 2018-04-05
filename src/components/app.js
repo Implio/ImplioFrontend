@@ -6,6 +6,8 @@ import * as actions from '../actions';
 
 import Nav from './nav/nav.js';
 import LoginPage from './login/login';
+import MyPatients from './patients/my-patients.js';
+import NewPatient from './patients/new-patient.js';
 
 class App extends Component {
 	constructor(props) {
@@ -24,9 +26,10 @@ class App extends Component {
 					<Nav />
 					<Switch>
 						<Route
-							path="/patients"
-							render={() => <h1>Patients Page</h1>}
+							path="/patients/newpatient"
+							component={NewPatient}
 						/>
+						<Route path="/patients" component={MyPatients} />
 
 						<Route
 							path="/dashboard"
