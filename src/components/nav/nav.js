@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+
+import * as actions from '../../actions';
 
 import logoIcon from '../../img/logo_icon.png';
 
@@ -60,7 +63,9 @@ class Nav extends Component {
 						</div>
 					</div>
 					<div className="navbar-end">
-						<a className="navbar-item">Log Out</a>
+						<a onClick={this.props.logout} className="navbar-item">
+							Log Out
+						</a>
 					</div>
 				</div>
 			</nav>
@@ -68,4 +73,4 @@ class Nav extends Component {
 	}
 }
 
-export default Nav;
+export default connect(null, actions)(Nav);

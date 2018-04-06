@@ -19,11 +19,11 @@ class Login extends Component {
 
 	onFormSubmit(e) {
 		e.preventDefault();
-		const id = this.refs.id.value;
+		const social = this.refs.social.value;
 		const password = this.refs.password.value;
 		this.setState({ isLoading: true });
 
-		this.props.login(id, password);
+		this.props.login(social, password);
 	}
 
 	render() {
@@ -43,14 +43,14 @@ class Login extends Component {
 						/>
 
 						<div className="field">
-							<label htmlFor="id" className="is-size-7">
+							<label htmlFor="social" className="is-size-7">
 								Social
 							</label>
 							<div className="control">
 								<input
 									type="text"
 									className="input is-shadowless"
-									ref="id"
+									ref="social"
 								/>
 							</div>
 						</div>
