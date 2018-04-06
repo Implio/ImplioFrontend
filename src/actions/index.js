@@ -2,24 +2,29 @@ import axios from 'axios';
 
 import * as types from './types';
 
-const API_URL = 'https://localhost:3000';
+const API_URL = 'http://localhost:3000';
 
-export function login(username, password) {
+export function login(social, password) {
 	return dispatch => {
+		dispatch({
+			type: types.LOGIN_ERROR,
+			payload: null,
+		});
+
 		axios
-			.post(`${API_URL}/login`, { username, password })
+			.post(`${API_URL}/login`, { social, password })
 			.then(res => {
-				if (res.data.err) {
+				if (res.data.error) {
 					return dispatch({
 						type: types.LOGIN_ERROR,
-						payload: res.data.err,
+						payload: res.data.error,
 					});
 				}
 
 				dispatch(fetchAll(res.data.token));
 			})
 			.catch(err => {
-				console.log(`Error: ${err}`);
+				console.log(err);
 			});
 	};
 }
