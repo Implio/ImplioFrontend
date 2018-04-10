@@ -15,7 +15,11 @@ class Nav extends Component {
 				aria-label="dropdown navigation"
 			>
 				<div className="navbar-brand">
-					<NavLink to="/dashboard" className="navbar-item">
+					<NavLink
+						to="/dashboard"
+						className="navbar-item"
+						activeClassName="is-active"
+					>
 						<img src={logoIcon} alt="logo" />
 					</NavLink>
 				</div>
@@ -73,4 +77,4 @@ class Nav extends Component {
 	}
 }
 
-export default connect(null, actions)(Nav);
+export default connect(null, actions, null, { pure: false })(Nav);
