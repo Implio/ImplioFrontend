@@ -46,6 +46,16 @@ export function fetchAll(token) {
 	return dispatch => {
 		dispatch({ type: types.AUTH_LOGIN });
 
-		//axios.all([]).then(axios.spread(() => {}));
+		axios
+			.all([
+				axios.get(`${API_URL}/users`),
+				axios.get(`${API_URL}/patients`),
+			])
+			.then(
+				axios.spread((users, patients) => {
+					dispatch({ type: types.FETCH_USERS, payload: users });
+					dispatch({ type: types.FETCH_PATIENTS, payload: patients });
+				}),
+			);
 	};
 }

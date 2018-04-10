@@ -5,6 +5,15 @@
 	box-shadow: 0 1.8px 1px rgba(0, 0, 0, 0.25);
 }
 
+.view-patient-card {
+	max-width: 800px;
+	margin: auto;
+}
+
 .create-patient {
 	margin-top: 2.5rem;
+}
+
+.view-patient-image {
+	display: inline-block;
 }

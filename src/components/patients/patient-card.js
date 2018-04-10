@@ -1,16 +1,21 @@
 import React from 'react';
-import logoIcon from '../../img/patient.png';
+import { Link } from 'react-router-dom';
+
+import empty from '../../img/empty.png';
 
 const PatientCard = props => {
 	const { firstName, lastName } = props.patient;
 
 	return (
-		<div className="card patient-card has-text-left">
+		<Link
+			to={`/patients/${props.patient._id}`}
+			className="card patient-card has-text-left"
+		>
 			<div className="card-content">
 				<div className="media">
 					<div className="media-left">
 						<figure className="image is-64x64">
-							<img src={logoIcon} alt="logo" />
+							<img src={empty} alt="patient" />
 						</figure>
 					</div>
 					<div className="media-content">
@@ -30,7 +35,7 @@ const PatientCard = props => {
 					</p>
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
 

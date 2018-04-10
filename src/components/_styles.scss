@@ -6,7 +6,7 @@ html,
 body,
 .root {
 	height: 100%;
-	background-color: $primary-light;
+	background-color: $white-ter;
 }
 
 .root * {
@@ -18,7 +18,17 @@ body,
 
 .is-underlined {
 	text-decoration: underline;
+}
 
 .media-content {
 	overflow: unset;
+}
+
+.card:hover {
+	background-color: $white-bis;
+}
+
+.image.is-256x256 {
+	height: 256px;
+	width: 256px;
 }
