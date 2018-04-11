@@ -18,7 +18,7 @@ class MyPatients extends Component {
 		return (
 			<section className="section">
 				<div className="container has-text-centered">
-					<h2 className="title is-2">My Patients</h2>
+					<h3 className="title is-3">My Patients</h3>
 
 					{this.renderPatients(this.props.patientsList)}
 

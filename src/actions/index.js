@@ -59,3 +59,10 @@ export function fetchAll(token) {
 			);
 	};
 }
+
+export function addPatient(patient) {
+	return {
+		type: types.ADD_PATIENT,
+		payload: axios.post(`${API_URL}/patients`, patient),
+	};
+}

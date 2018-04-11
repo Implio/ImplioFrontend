@@ -49,7 +49,7 @@ class Login extends Component {
 							<div className="control">
 								<input
 									type="text"
-									className="input is-shadowless"
+									className="input"
 									ref="social"
 								/>
 							</div>
@@ -62,7 +62,7 @@ class Login extends Component {
 							<div className="control">
 								<input
 									type="password"
-									className="input is-shadowless"
+									className="input"
 									ref="password"
 								/>
 							</div>

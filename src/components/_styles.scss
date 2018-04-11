@@ -6,7 +6,7 @@ html,
 body,
 .root {
 	height: 100%;
-	background-color: $white-ter;
+	background-color: $primary-light;
 }
 
 .root * {
@@ -24,7 +24,7 @@ body,
 	overflow: unset;
 }
 
-.card:hover {
+a.card:hover {
 	background-color: $white-bis;
 }
 

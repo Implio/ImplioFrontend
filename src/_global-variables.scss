@@ -6,6 +6,7 @@ $primary-light: #e9fafc;
 $link: $primary;
 
 $input-background-color: $primary-light;
-$input-shadow: 2px 2px 3px rgba(10, 10, 10, 0.1),
-	0 0 0 1px rgba(10, 10, 10, 0.1);
-$input-border-color: none;
+$input-shadow: none;
+$input-border-color: transparent;
+
+$label-weight: $weight-light;

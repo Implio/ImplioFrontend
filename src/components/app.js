@@ -8,7 +8,7 @@ import Nav from './nav/nav.js';
 import LoginPage from './login/login';
 
 import MyPatients from './patients/my-patients';
-import NewPatient from './patients/new-patient';
+import AddEditPatient from './patients/add-edit-patient';
 import ViewPatient from './patients/view-patient';
 
 class App extends Component {
@@ -29,7 +29,7 @@ class App extends Component {
 					<Switch>
 						<Route
 							path="/patients/new-patient"
-							component={NewPatient}
+							component={AddEditPatient}
 						/>
 						<Route path="/patients/:id" component={ViewPatient} />
 						<Route path="/patients" component={MyPatients} />
