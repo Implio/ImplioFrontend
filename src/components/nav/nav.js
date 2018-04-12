@@ -7,6 +7,20 @@ import * as actions from '../../actions';
 import logoIcon from '../../img/logo_icon.png';
 
 class Nav extends Component {
+	renderEmployees(me) {
+		if (!me || !me.isAdmin) return null;
+
+		return (
+			<NavLink
+				to="/employees"
+				className="navbar-item is-tab"
+				activeClassName="is-active"
+			>
+				Employees
+			</NavLink>
+		);
+	}
+
 	render() {
 		return (
 			<nav
@@ -39,6 +53,8 @@ class Nav extends Component {
 						>
 							Patients
 						</NavLink>
+
+						{this.renderEmployees(this.props.me)}
 						<NavLink
 							to="/messages"
 							className="navbar-item is-tab"

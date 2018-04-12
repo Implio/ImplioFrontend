@@ -25,7 +25,7 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-					<Nav />
+					<Nav me={this.props.me} />
 					<Switch>
 						<Route
 							path="/patients/new-patient"
@@ -42,6 +42,11 @@ class App extends Component {
 							path="/dashboard"
 							render={() => <div>Dashboard</div>}
 						/>
+
+						<Route
+							path="/employees"
+							render={() => <div>Employees</div>}
+						/>
 						<Redirect from="/" to="/dashboard" />
 					</Switch>
 				</div>
@@ -53,6 +58,7 @@ class App extends Component {
 function mapStateToProps(state) {
 	return {
 		isLoggedIn: state.auth.isLoggedIn,
+		me: state.users.me
 	};
 }
 

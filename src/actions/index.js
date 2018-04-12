@@ -50,11 +50,13 @@ export function fetchAll(token) {
 			.all([
 				axios.get(`${routes.apiRoot}/users`),
 				axios.get(`${routes.apiRoot}/patients`),
+				axios.get(`${routes.apiRoot}/me`),
 			])
 			.then(
-				axios.spread((users, patients) => {
+				axios.spread((users, patients, me) => {
 					dispatch({ type: types.FETCH_USERS, payload: users });
 					dispatch({ type: types.FETCH_PATIENTS, payload: patients });
+					dispatch({ type: types.FETCH_ME, payload: me });
 				}),
 			);
 	};
