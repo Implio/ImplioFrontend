@@ -66,3 +66,10 @@ export function addPatient(patient) {
 		payload: axios.post(`${API_URL}/patients`, patient),
 	};
 }
+
+export function editPatient(patient) {
+	return {
+		type: types.EDIT_PATIENT,
+		payload: axios.patch(`${API_URL}/patients/${patient._id}`, patient),
+	};
+}

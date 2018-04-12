@@ -26,9 +26,10 @@ const PatientCard = props => {
 
 				<div className="content">
 					<p className="subtitle is-size-7">
-						<strong>Room:</strong> {props.patient.roomNumber}
+						<strong>Room: </strong>
+						{props.patient.roomNumber}
 						<br />
-						<strong>Building:</strong>
+						<strong>Building: </strong>
 						{props.patient.buildingNumber}
 						<br />
 						<strong>Phone #:</strong> {props.patient.phoneNumber}

@@ -31,6 +31,10 @@ class App extends Component {
 							path="/patients/new-patient"
 							component={AddEditPatient}
 						/>
+						<Route
+							path="/patients/:id/edit"
+							component={AddEditPatient}
+						/>
 						<Route path="/patients/:id" component={ViewPatient} />
 						<Route path="/patients" component={MyPatients} />
 

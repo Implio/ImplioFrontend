@@ -4,3 +4,4 @@ export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const ADD_PATIENT = 'ADD_PATIENT';
+export const EDIT_PATIENT = 'EDIT_PATIENT';
