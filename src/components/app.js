@@ -10,6 +10,7 @@ import LoginPage from './login/login';
 import MyPatients from './patients/my-patients';
 import AddEditPatient from './patients/add-edit-patient';
 import ViewPatient from './patients/view-patient';
+import MyEmployees from './employees/my-employees';
 
 class App extends Component {
 	constructor(props) {
@@ -43,10 +44,7 @@ class App extends Component {
 							render={() => <div>Dashboard</div>}
 						/>
 
-						<Route
-							path="/employees"
-							render={() => <div>Employees</div>}
-						/>
+						<Route path="/employees" component={MyEmployees} />
 						<Redirect from="/" to="/dashboard" />
 					</Switch>
 				</div>

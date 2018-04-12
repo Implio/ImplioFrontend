@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 	form: formReducer,
 	auth: authReducer,
 	users: usersReducer,
-	patients: patientsReducer,
+	patients: patientsReducer
 });
 
 export default rootReducer;
