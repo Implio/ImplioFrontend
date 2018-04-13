@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import moment from 'moment';
 
+import routes from '../../../config/routes';
+
 import empty from '../../img/empty.png';
 import Loader from '../loader';
 
@@ -27,7 +29,16 @@ const ViewPatient = props => {
 								} ${selectedPatient.lastName}`}</h3>
 
 								<figure className="image is-256x256 view-patient-image">
-									<img src={empty} alt="patient" />
+									<img
+										src={
+											selectedPatient.picture
+												? `${routes.files}/${
+														selectedPatient.picture
+												  }`
+												: empty
+										}
+										alt="patient"
+									/>
 								</figure>
 							</div>
 							<div className="column">

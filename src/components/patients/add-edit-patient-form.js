@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
+import routes from '../../../config/routes';
+
 import empty from '../../img/empty.png';
 
 const validate = values => {
@@ -41,47 +43,32 @@ const Input = ({ input, placeholder, label, meta: { touched, error } }) => (
 	</div>
 );
 
-class AddEditPatient extends Component {
+class AddEditPatientForm extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			isUploading: false,
+			fields: {
+				picture: props.initialValues.picture,
+			},
+		};
+	}
+
 	handleFile(e) {
-		this.setState({ errors: {} });
-
-		function getExtension(filename) {
-			const parts = filename.split('.');
-			return parts[parts.length - 1];
-		}
-
-		function isImage(filename) {
-			const ext = getExtension(filename);
-			switch (ext.toLowerCase()) {
-				case 'jpg':
-				case 'gif':
-				case 'bmp':
-				case 'png':
-					return true;
-
-				default:
-					return false;
-			}
-		}
-
 		const file = e.target.files[0];
 		const formData = new FormData();
 		formData.append('file', file);
 
-		if (!isImage(file.name)) {
-			return this.setState({
-				errors: {
-					message: 'The selected file is not a supported image',
-				},
-			});
-		}
-
 		this.setState({ isUploading: true });
 
-		this.props.uploadImage(formData).then(action => {
+		this.props.uploadFile(formData).then(action => {
 			this.setState({
 				isUploading: false,
-				picture: action.payload.data.filename,
+				fields: {
+					...this.state.fields,
+					picture: action.payload.data.filename,
+				},
 			});
 		});
 	}
@@ -92,7 +79,10 @@ class AddEditPatient extends Component {
 		return (
 			<form
 				onSubmit={handleSubmit(values =>
-					this.props.onFormSubmit(values),
+					this.props.onFormSubmit({
+						...values,
+						...this.state.fields,
+					}),
 				)}
 			>
 				<h6 className="is-size-6">Personal Information</h6>
@@ -141,7 +131,16 @@ class AddEditPatient extends Component {
 					</div>
 					<div className="column">
 						<figure className="image is-128x128 add-edit-patient-image">
-							<img src={empty} alt="patient" />
+							<img
+								src={
+									this.state.fields.picture
+										? `${routes.files}/${
+												this.state.fields.picture
+										  }`
+										: empty
+								}
+								alt="patient"
+							/>
 						</figure>
 
 						<div className="field">
@@ -157,7 +156,7 @@ class AddEditPatient extends Component {
 										className="file-input"
 										type="file"
 										accept=".jpg, .png, .jpeg"
-										onChange={this.handleFile}
+										onChange={this.handleFile.bind(this)}
 									/>
 									Upload Picture
 								</a>
@@ -223,9 +222,9 @@ class AddEditPatient extends Component {
 	}
 }
 
-AddEditPatient = reduxForm({
+AddEditPatientForm = reduxForm({
 	form: 'patient',
 	validate,
-})(AddEditPatient);
+})(AddEditPatientForm);
 
-export default AddEditPatient;
+export default AddEditPatientForm;

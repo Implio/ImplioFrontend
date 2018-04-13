@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import routes from '../../../config/routes';
+
 import empty from '../../img/empty.png';
 
 const PatientCard = props => {
-	const { firstName, lastName } = props.patient;
+	const { firstName, lastName, picture } = props.patient;
 
 	return (
 		<Link
@@ -15,7 +17,14 @@ const PatientCard = props => {
 				<div className="media">
 					<div className="media-left">
 						<figure className="image is-64x64">
-							<img src={empty} alt="patient" />
+							<img
+								src={
+									picture
+										? `${routes.files}/${picture}`
+										: empty
+								}
+								alt="patient"
+							/>
 						</figure>
 					</div>
 					<div className="media-content">

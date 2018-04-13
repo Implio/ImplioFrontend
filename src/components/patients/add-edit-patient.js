@@ -54,6 +54,7 @@ class AddEditPatient extends Component {
 						<div className="card-content">
 							<AddEditPatientForm
 								onFormSubmit={this.handleFormSubmit.bind(this)}
+								uploadFile={this.props.uploadFile}
 								initialValues={initialValues}
 							/>
 						</div>

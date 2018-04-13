@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import * as types from './types';
 
-const API_URL = 'http://localhost:3000';
+import routes from '../../config/routes';
 
 export function login(social, password) {
 	return dispatch => {
@@ -12,7 +12,7 @@ export function login(social, password) {
 		});
 
 		axios
-			.post(`${API_URL}/login`, { social, password })
+			.post(`${routes.apiRoot}/login`, { social, password })
 			.then(res => {
 				if (res.data.error) {
 					return dispatch({
@@ -34,7 +34,7 @@ export function logout() {
 
 	return {
 		type: types.AUTH_LOGOUT,
-		payload: axios.delete(`${API_URL}/logout`),
+		payload: axios.delete(`${routes.apiRoot}/logout`),
 	};
 }
 
@@ -48,8 +48,8 @@ export function fetchAll(token) {
 
 		axios
 			.all([
-				axios.get(`${API_URL}/users`),
-				axios.get(`${API_URL}/patients`),
+				axios.get(`${routes.apiRoot}/users`),
+				axios.get(`${routes.apiRoot}/patients`),
 			])
 			.then(
 				axios.spread((users, patients) => {
@@ -60,16 +60,26 @@ export function fetchAll(token) {
 	};
 }
 
+export function uploadFile(formData) {
+	return {
+		type: types.UPLOAD_FILE,
+		payload: axios.post(`${routes.apiRoot}/files`, formData),
+	};
+}
+
 export function addPatient(patient) {
 	return {
 		type: types.ADD_PATIENT,
-		payload: axios.post(`${API_URL}/patients`, patient),
+		payload: axios.post(`${routes.apiRoot}/patients`, patient),
 	};
 }
 
 export function editPatient(patient) {
 	return {
 		type: types.EDIT_PATIENT,
-		payload: axios.patch(`${API_URL}/patients/${patient._id}`, patient),
+		payload: axios.patch(
+			`${routes.apiRoot}/patients/${patient._id}`,
+			patient,
+		),
 	};
 }
