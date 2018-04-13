@@ -10,7 +10,10 @@ import LoginPage from './login/login';
 import MyPatients from './patients/my-patients';
 import AddEditPatient from './patients/add-edit-patient';
 import ViewPatient from './patients/view-patient';
+
 import MyEmployees from './employees/my-employees';
+import ViewEmployee from './employees/view-employee';
+import AddEditEmployee from './employees/add-edit-employee';
 
 class App extends Component {
 	constructor(props) {
@@ -29,7 +32,7 @@ class App extends Component {
 					<Nav me={this.props.me} />
 					<Switch>
 						<Route
-							path="/patients/new-patient"
+							path="/patients/new"
 							component={AddEditPatient}
 						/>
 						<Route
@@ -40,11 +43,20 @@ class App extends Component {
 						<Route path="/patients" component={MyPatients} />
 
 						<Route
+							path="/employees/new"
+							component={AddEditEmployee}
+						/>
+						<Route
+							path="/employees/:id/edit"
+							component={AddEditEmployee}
+						/>
+						<Route path="/employees/:id" component={ViewEmployee} />
+						<Route path="/employees" component={MyEmployees} />
+
+						<Route
 							path="/dashboard"
 							render={() => <div>Dashboard</div>}
 						/>
-
-						<Route path="/employees" component={MyEmployees} />
 						<Redirect from="/" to="/dashboard" />
 					</Switch>
 				</div>
@@ -56,7 +68,7 @@ class App extends Component {
 function mapStateToProps(state) {
 	return {
 		isLoggedIn: state.auth.isLoggedIn,
-		me: state.users.me
+		me: state.users.me,
 	};
 }
 

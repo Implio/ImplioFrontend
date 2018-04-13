@@ -9,14 +9,9 @@ const validate = values => {
 	const errors = {
 		firstName: null,
 		lastName: null,
-		address: null,
-		phoneNumber: null,
 		dob: null,
 		social: null,
-		companyName: null,
-		memberName: null,
-		memberId: null,
-		groupNumber: null,
+		title: null,
 		roomNumber: null,
 		buildingNumber: null,
 	};
@@ -25,17 +20,27 @@ const validate = values => {
 		key => (errors[key] = !values[key] ? 'Required' : null),
 	);
 
+	if (values.password !== values.confirmPassword) {
+		errors.confirmPassword = 'Passwords do not match';
+	}
+
 	return errors;
 };
 
-const Input = ({ input, placeholder, label, meta: { touched, error } }) => (
+const Input = ({
+	input,
+	placeholder,
+	type,
+	label,
+	meta: { touched, error },
+}) => (
 	<div className="field">
 		<div className="control">
 			<label className="is-size-7">{label}</label>
 			<input
 				{...input}
 				placeholder={placeholder}
-				type="text"
+				type={type || 'text'}
 				className={`input ${touched && error ? 'is-danger' : ''}`}
 			/>
 			{touched && error && <p className="help is-danger">{error}</p>}
@@ -43,7 +48,7 @@ const Input = ({ input, placeholder, label, meta: { touched, error } }) => (
 	</div>
 );
 
-class AddEditPatientForm extends Component {
+class AddEditEmployeeForm extends Component {
 	constructor(props) {
 		super(props);
 
@@ -51,20 +56,8 @@ class AddEditPatientForm extends Component {
 			isUploading: false,
 			fields: {
 				picture: props.initialValues.picture,
-				documents: props.initialValues.documents || [],
 			},
 		};
-	}
-
-	handleRemoveDocument(index) {
-		this.setState({
-			fields: {
-				...this.state.fields,
-				documents: this.state.fields.documents.filter(
-					(doc, i) => index !== i,
-				),
-			},
-		});
 	}
 
 	handleImage(e) {
@@ -85,25 +78,42 @@ class AddEditPatientForm extends Component {
 		});
 	}
 
-	handleDocument(e) {
-		const file = e.target.files[0];
-		const formData = new FormData();
-		formData.append('file', file);
+	renderAdminOptions(isAdmin) {
+		if (!isAdmin) return null;
 
-		this.setState({ isUploadingFile: true });
-
-		this.props.uploadFile(formData).then(action => {
-			this.setState({
-				isUploadingFile: false,
-				fields: {
-					...this.state.fields,
-					documents: [
-						...this.state.fields.documents,
-						action.payload.data.filename,
-					],
-				},
-			});
-		});
+		return (
+			<div className="columns">
+				<div className="column is-half">
+					<h6 className="is-size-6">Admin Options</h6>
+					<div className="field">
+						<label className="is-size-7">Is Manager?</label>
+						<div className="control">
+							<div className="select">
+								<Field name="isAdmin" component="select">
+									<option value={false}>No</option>
+									<option value={true}>Yes</option>
+								</Field>
+							</div>
+						</div>
+					</div>
+					<div className="field">
+						<label className="is-size-7">Manager</label>
+						<div className="control">
+							<div className="select">
+								<Field name="managerId" component="select">
+									<option value={null}>No manager</option>
+									{this.props.managers.map(m => (
+										<option key={m._id} value={m._id}>{`${
+											m.firstName
+										} ${m.lastName}`}</option>
+									))}
+								</Field>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
 	}
 
 	render() {
@@ -136,18 +146,12 @@ class AddEditPatientForm extends Component {
 				<div className="columns">
 					<div className="column">
 						<Field
-							name="address"
+							name="social"
 							component={Input}
-							label="Address"
+							label="Last 4 digits of SSN"
 						/>
 						<div className="field is-horizontal">
 							<div className="field-body">
-								<Field
-									name="phoneNumber"
-									component={Input}
-									label="Phone Number"
-									placeholder="(_ _ _) - _ _ _ - _ _ _ _"
-								/>
 								<Field
 									name="dob"
 									component={Input}
@@ -155,9 +159,23 @@ class AddEditPatientForm extends Component {
 									placeholder="MM-DD-YYYY"
 								/>
 								<Field
-									name="social"
+									name="title"
 									component={Input}
-									label="SSN"
+									label="Title"
+								/>
+							</div>
+						</div>
+						<div className="field is-horizontal">
+							<div className="field-body">
+								<Field
+									name="roomNumber"
+									component={Input}
+									label="Room Number"
+								/>
+								<Field
+									name="buildingNumber"
+									component={Input}
+									label="Building Number"
 								/>
 							</div>
 						</div>
@@ -197,85 +215,28 @@ class AddEditPatientForm extends Component {
 						</div>
 					</div>
 				</div>
-				<h6 className="is-size-6">Insurance Information</h6>
-				<div className="field is-horizontal">
-					<div className="field-body">
-						<Field
-							name="companyName"
-							component={Input}
-							label="Company Name"
-						/>
-						<Field
-							name="memberName"
-							component={Input}
-							label="Member Name"
-						/>
-						<Field
-							name="memberId"
-							component={Input}
-							label="Member ID"
-						/>
-
-						<Field
-							name="groupNumber"
-							component={Input}
-							label="Group Number"
-						/>
-					</div>
-				</div>
-				<h6 className="is-size-6">Hospital Information</h6>
+				<h6 className="is-size-6">Password</h6>
 				<div className="columns">
 					<div className="column is-half">
-						<div className="field is-horizontal">
-							<div className="field-body">
-								<Field
-									name="roomNumber"
-									component={Input}
-									label="Room Number"
-								/>
-								<Field
-									name="buildingNumber"
-									component={Input}
-									label="Building Number"
-								/>
-							</div>
-						</div>
+						<Field
+							name="password"
+							component={Input}
+							label={
+								this.props.initialValues._id
+									? 'Change Password'
+									: 'New Password'
+							}
+							type="password"
+						/>
+						<Field
+							name="confirmPassword"
+							component={Input}
+							label="Confirm Password"
+							type="password"
+						/>
 					</div>
 				</div>
-				<h6 className="is-size-6">Documents</h6>
-				<ul>
-					{this.state.fields.documents.map((doc, index) => (
-						<li key={index}>
-							<a
-								href={`${routes.files}/${doc}`}
-								target="_blank"
-							>{`${doc} `}</a>
-							<a
-								className="has-text-danger"
-								onClick={() => this.handleRemoveDocument(index)}
-							>
-								X
-							</a>
-						</li>
-					))}
-				</ul>
-				<br />
-				<div className="field">
-					<div className="control">
-						<a
-							className={`button is-primary ${
-								this.state.isUploadingFile ? 'is-loading' : ''
-							}`}
-						>
-							<input
-								className="file-input"
-								type="file"
-								onChange={this.handleDocument.bind(this)}
-							/>
-							Upload Document
-						</a>
-					</div>
-				</div>
+				{this.renderAdminOptions(this.props.isAdmin)}
 				<button
 					type="submit"
 					className={`button is-primary ${
@@ -289,9 +250,9 @@ class AddEditPatientForm extends Component {
 	}
 }
 
-AddEditPatientForm = reduxForm({
-	form: 'patient',
+AddEditEmployeeForm = reduxForm({
+	form: 'employee',
 	validate,
-})(AddEditPatientForm);
+})(AddEditEmployeeForm);
 
-export default AddEditPatientForm;
+export default AddEditEmployeeForm;

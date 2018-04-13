@@ -6,4 +6,6 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const ADD_PATIENT = 'ADD_PATIENT';
 export const EDIT_PATIENT = 'EDIT_PATIENT';
+export const ADD_USER = 'ADD_USER';
+export const EDIT_USER = 'EDIT_USER';
 export const UPLOAD_FILE = 'UPLOAD_FILE';

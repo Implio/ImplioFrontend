@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import routes from '../../../config/routes';
+
 import empty from '../../img/empty.png';
 
 const EmployeeCard = props => {
@@ -8,14 +10,23 @@ const EmployeeCard = props => {
 
 	return (
 		<Link
-			to={`/user/${props.employee._id}`}
+			to={`/employees/${props.employee._id}`}
 			className="card patient-card has-text-left"
 		>
 			<div className="card-content">
 				<div className="media">
 					<div className="media-left">
 						<figure className="image is-64x64">
-							<img src={empty} alt="patient" />
+							<img
+								src={
+									props.employee.picture
+										? `${routes.files}/${
+												props.employee.picture
+										  }`
+										: empty
+								}
+								alt="employee"
+							/>
 						</figure>
 					</div>
 					<div className="media-content">
@@ -30,7 +41,10 @@ const EmployeeCard = props => {
 						{props.employee.title}
 						<br />
 						<strong>Room: </strong>
-						{props.employee.room}
+						{props.employee.roomNumber}
+						<br />
+						<strong>Building: </strong>
+						{props.employee.buildingNumber}
 					</p>
 				</div>
 			</div>

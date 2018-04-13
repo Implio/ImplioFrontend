@@ -39,3 +39,19 @@ a.card:hover {
 	cursor: pointer;
 	opacity: 0;
 }
+
+.calendar-container {
+	height: 500px;
+}
+
+.rbc-event {
+	background-color: $primary;
+}
+
+.rbc-event.rbc-selected {
+	background-color: $primary-dark;
+}
+
+.rbc-today {
+	background-color: $primary-light;
+}

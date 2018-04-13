@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Loader from '../loader';
@@ -13,7 +13,9 @@ class MyEmployees extends Component {
 	}
 
 	render() {
-		if (!this.props.employeeList || !this.props.me) return <Loader />;
+		if (!this.props.employeesList || !this.props.me) return <Loader />;
+
+		if (!this.props.me.isAdmin) return <Redirect to="/dashboard" />;
 
 		return (
 			<section className="section">
@@ -21,16 +23,26 @@ class MyEmployees extends Component {
 					<h3 className="title is-3">My Employees</h3>
 
 					{this.renderEmployees(
-						this.props.employeeList.filter(
-							employee => employee.managerId === this.props.me._id
-						)
+						this.props.employeesList.filter(
+							e => e.managerId === this.props.me._id,
+						),
+					)}
+
+					<br />
+					<br />
+
+					<h3 className="title is-3">All Employees</h3>
+
+					{this.renderEmployees(
+						this.props.employeesList.filter(
+							e =>
+								e.managerId !== this.props.me._id &&
+								e._id !== this.props.me._id,
+						),
 					)}
 
 					<div className="buttons is-centered create-patient">
-						<Link
-							className="button is-primary"
-							to="/patients/new-patient"
-						>
+						<Link className="button is-primary" to="/employees/new">
 							Create Employee
 						</Link>
 					</div>
@@ -42,8 +54,8 @@ class MyEmployees extends Component {
 
 function mapStateToProps(state) {
 	return {
-		employeeList: state.users.list,
-		me: state.users.me
+		employeesList: state.users.list,
+		me: state.users.me,
 	};
 }
 

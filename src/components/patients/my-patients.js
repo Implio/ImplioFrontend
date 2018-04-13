@@ -23,10 +23,7 @@ class MyPatients extends Component {
 					{this.renderPatients(this.props.patientsList)}
 
 					<div className="buttons is-centered create-patient">
-						<Link
-							className="button is-primary"
-							to="/patients/new-patient"
-						>
+						<Link className="button is-primary" to="/patients/new">
 							Create Patient
 						</Link>
 					</div>

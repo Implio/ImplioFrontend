@@ -6,6 +6,7 @@ import ReduxPromise from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 
 import reducers from './reducers';
+import '../node_modules/react-big-calendar/lib/css/react-big-calendar.css';
 import './main.scss';
 
 import App from './components/app.js';

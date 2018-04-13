@@ -85,3 +85,20 @@ export function editPatient(patient) {
 		),
 	};
 }
+
+export function addEmployee(employee) {
+	return {
+		type: types.ADD_USER,
+		payload: axios.post(`${routes.apiRoot}/users`, employee),
+	};
+}
+
+export function editEmployee(employee) {
+	return {
+		type: types.EDIT_USER,
+		payload: axios.patch(
+			`${routes.apiRoot}/users/${employee._id}`,
+			employee,
+		),
+	};
+}
