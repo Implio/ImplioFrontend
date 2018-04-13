@@ -31,15 +31,12 @@ const EmployeeCard = props => {
 					</div>
 					<div className="media-content">
 						<p className="title is-5">{`${firstName} ${lastName}`}</p>
-						<p className="subtitle is-7">{props.employee._id}</p>
+						<p className="subtitle is-7">{props.employee.title}</p>
 					</div>
 				</div>
 
 				<div className="content">
 					<p className="subtitle is-size-7">
-						<strong>Title: </strong>
-						{props.employee.title}
-						<br />
 						<strong>Room: </strong>
 						{props.employee.roomNumber}
 						<br />

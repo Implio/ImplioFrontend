@@ -65,6 +65,7 @@ class AddEditPatient extends Component {
 								onFormSubmit={this.handleFormSubmit.bind(this)}
 								uploadFile={this.props.uploadFile}
 								initialValues={initialValues}
+								doctors={this.props.doctors}
 							/>
 						</div>
 					</div>
@@ -77,6 +78,7 @@ class AddEditPatient extends Component {
 function mapStateToProps(state) {
 	return {
 		patientsList: state.patients.list,
+		doctors: state.users.doctors,
 	};
 }
 

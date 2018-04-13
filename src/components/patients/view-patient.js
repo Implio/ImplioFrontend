@@ -17,6 +17,14 @@ const ViewPatient = props => {
 
 	if (!selectedPatient) return <Redirect to="/patients" />;
 
+	const primaryPhysician = props.doctors.find(
+		doc => doc._id === selectedPatient.primaryPhysician,
+	);
+
+	const consultingPhysician = props.doctors.find(
+		doc => doc._id === selectedPatient.consultingPhysician,
+	);
+
 	return (
 		<section className="section">
 			<div className="container">
@@ -79,6 +87,23 @@ const ViewPatient = props => {
 								<h6 className="is-size-6">
 									<strong>SSN: </strong>
 									{selectedPatient.social}
+								</h6>
+								<br />
+								<h6 className="is-size-6">
+									<strong>Primary Physician: </strong>
+									{primaryPhysician
+										? `${primaryPhysician.firstName} ${
+												primaryPhysician.lastName
+										  }`
+										: 'No Physician'}
+								</h6>
+								<h6 className="is-size-6">
+									<strong>Consulting Physician: </strong>
+									{consultingPhysician
+										? `${consultingPhysician.firstName} ${
+												consultingPhysician.lastName
+										  }`
+										: 'No Physician'}
 								</h6>
 								<br />
 								<h6 className="is-size-6">
@@ -153,6 +178,7 @@ const ViewPatient = props => {
 function mapStateToProps(state) {
 	return {
 		patientsList: state.patients.list,
+		doctors: state.users.doctors,
 	};
 }
 

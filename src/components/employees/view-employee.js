@@ -72,10 +72,6 @@ const ViewEmployee = props => {
 								</h6>
 								<br />
 								<h6 className="is-size-6">
-									<strong>ID: </strong>
-									{selectedEmployee._id}
-								</h6>
-								<h6 className="is-size-6">
 									<strong>Last 4 digits of SSN: </strong>
 									{selectedEmployee.social}
 								</h6>
@@ -83,6 +79,10 @@ const ViewEmployee = props => {
 								<h6 className="is-size-6">
 									<strong>Title: </strong>
 									{selectedEmployee.title}
+								</h6>
+								<h6 className="is-size-6">
+									<strong>Doctor: </strong>
+									{selectedEmployee.isDoctor ? 'Yes' : 'No'}
 								</h6>
 								<h6 className="is-size-6">
 									<strong>Date of Birth: </strong>

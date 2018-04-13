@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import routes from '../../../config/routes';
+import { Input, Select } from '../redux-fields';
 
 import empty from '../../img/empty.png';
 
@@ -26,27 +27,6 @@ const validate = values => {
 
 	return errors;
 };
-
-const Input = ({
-	input,
-	placeholder,
-	type,
-	label,
-	meta: { touched, error },
-}) => (
-	<div className="field">
-		<div className="control">
-			<label className="is-size-7">{label}</label>
-			<input
-				{...input}
-				placeholder={placeholder}
-				type={type || 'text'}
-				className={`input ${touched && error ? 'is-danger' : ''}`}
-			/>
-			{touched && error && <p className="help is-danger">{error}</p>}
-		</div>
-	</div>
-);
 
 class AddEditEmployeeForm extends Component {
 	constructor(props) {
@@ -85,32 +65,36 @@ class AddEditEmployeeForm extends Component {
 			<div className="columns">
 				<div className="column is-half">
 					<h6 className="is-size-6">Admin Options</h6>
-					<div className="field">
-						<label className="is-size-7">Is Manager?</label>
-						<div className="control">
-							<div className="select">
-								<Field name="isAdmin" component="select">
-									<option value={false}>No</option>
-									<option value={true}>Yes</option>
-								</Field>
-							</div>
-						</div>
-					</div>
-					<div className="field">
-						<label className="is-size-7">Manager</label>
-						<div className="control">
-							<div className="select">
-								<Field name="managerId" component="select">
-									<option value={null}>No manager</option>
-									{this.props.managers.map(m => (
-										<option key={m._id} value={m._id}>{`${
-											m.firstName
-										} ${m.lastName}`}</option>
-									))}
-								</Field>
-							</div>
-						</div>
-					</div>
+					<Field
+						name="isAdmin"
+						label="Admin Level"
+						options={[
+							{ value: false, label: 'Employee' },
+							{ value: true, label: 'Manager' },
+						]}
+						component={Select}
+					/>
+					<Field
+						name="managerId"
+						label="Manager"
+						options={[
+							{ value: null, label: 'No manager' },
+							...this.props.managers.map(m => ({
+								value: m._id,
+								label: `${m.firstName} ${m.lastName}`,
+							})),
+						]}
+						component={Select}
+					/>
+					<Field
+						name="isDoctor"
+						label="Doctor"
+						options={[
+							{ value: false, label: 'No' },
+							{ value: true, label: 'Yes' },
+						]}
+						component={Select}
+					/>
 				</div>
 			</div>
 		);

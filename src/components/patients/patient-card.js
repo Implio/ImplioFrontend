@@ -29,7 +29,6 @@ const PatientCard = props => {
 					</div>
 					<div className="media-content">
 						<p className="title is-5">{`${firstName} ${lastName}`}</p>
-						<p className="subtitle is-7">{props.patient._id}</p>
 					</div>
 				</div>
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import routes from '../../../config/routes';
+import { Input, Select } from '../redux-fields';
 
 import empty from '../../img/empty.png';
 
@@ -16,6 +17,7 @@ const validate = values => {
 		companyName: null,
 		memberName: null,
 		memberId: null,
+		primaryPhysician: null,
 		groupNumber: null,
 		roomNumber: null,
 		buildingNumber: null,
@@ -27,21 +29,6 @@ const validate = values => {
 
 	return errors;
 };
-
-const Input = ({ input, placeholder, label, meta: { touched, error } }) => (
-	<div className="field">
-		<div className="control">
-			<label className="is-size-7">{label}</label>
-			<input
-				{...input}
-				placeholder={placeholder}
-				type="text"
-				className={`input ${touched && error ? 'is-danger' : ''}`}
-			/>
-			{touched && error && <p className="help is-danger">{error}</p>}
-		</div>
-	</div>
-);
 
 class AddEditPatientForm extends Component {
 	constructor(props) {
@@ -197,6 +184,44 @@ class AddEditPatientForm extends Component {
 						</div>
 					</div>
 				</div>
+				<h6 className="is-size-6">Physician Information</h6>
+				<div className="columns">
+					<div className="column is-half">
+						<div className="field is-horizontal">
+							<div className="field-body">
+								<Field
+									name="primaryPhysician"
+									component={Select}
+									label="Primary Physician"
+									options={[
+										{ value: '', label: 'No Physician' },
+										...this.props.doctors.map(doc => ({
+											value: doc._id,
+											label: `${doc.firstName} ${
+												doc.lastName
+											}`,
+										})),
+									]}
+								/>
+								<Field
+									name="consultingPhysician"
+									component={Select}
+									label="Consulting Physician"
+									options={[
+										{ value: '', label: 'No Physician' },
+										...this.props.doctors.map(doc => ({
+											value: doc._id,
+											label: `${doc.firstName} ${
+												doc.lastName
+											}`,
+										})),
+									]}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<h6 className="is-size-6">Insurance Information</h6>
 				<div className="field is-horizontal">
 					<div className="field-body">
