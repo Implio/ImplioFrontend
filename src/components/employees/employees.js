@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Loader from '../loader';
 import EmployeeCard from './employee-card.js';
 
-class MyEmployees extends Component {
+class Employees extends Component {
 	renderEmployees(employees) {
 		return employees.map(employee => (
 			<EmployeeCard key={employee._id} employee={employee} />
@@ -43,7 +43,7 @@ class MyEmployees extends Component {
 
 					<div className="buttons is-centered create-patient">
 						<Link className="button is-primary" to="/employees/new">
-							Create Employee
+							Create New Employee
 						</Link>
 					</div>
 				</div>
@@ -59,4 +59,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(MyEmployees);
+export default connect(mapStateToProps)(Employees);

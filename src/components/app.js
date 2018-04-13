@@ -7,11 +7,11 @@ import * as actions from '../actions';
 import Nav from './nav/nav.js';
 import LoginPage from './login/login';
 
-import MyPatients from './patients/my-patients';
+import Patients from './patients/patients';
 import AddEditPatient from './patients/add-edit-patient';
 import ViewPatient from './patients/view-patient';
 
-import MyEmployees from './employees/my-employees';
+import Employees from './employees/employees';
 import ViewEmployee from './employees/view-employee';
 import AddEditEmployee from './employees/add-edit-employee';
 
@@ -40,7 +40,7 @@ class App extends Component {
 							component={AddEditPatient}
 						/>
 						<Route path="/patients/:id" component={ViewPatient} />
-						<Route path="/patients" component={MyPatients} />
+						<Route path="/patients" component={Patients} />
 
 						<Route
 							path="/employees/new"
@@ -51,7 +51,7 @@ class App extends Component {
 							component={AddEditEmployee}
 						/>
 						<Route path="/employees/:id" component={ViewEmployee} />
-						<Route path="/employees" component={MyEmployees} />
+						<Route path="/employees" component={Employees} />
 
 						<Route
 							path="/dashboard"

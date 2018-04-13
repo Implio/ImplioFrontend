@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Loader from '../loader';
 import PatientCard from './patient-card.js';
 
-class MyPatients extends Component {
+class Patients extends Component {
 	renderPatients(patients) {
 		return patients.map(patient => (
 			<PatientCard key={patient._id} patient={patient} />
@@ -18,13 +18,13 @@ class MyPatients extends Component {
 		return (
 			<section className="section">
 				<div className="container has-text-centered">
-					<h3 className="title is-3">My Patients</h3>
+					<h3 className="title is-3">Patients</h3>
 
 					{this.renderPatients(this.props.patientsList)}
 
 					<div className="buttons is-centered create-patient">
 						<Link className="button is-primary" to="/patients/new">
-							Create Patient
+							Enter New Patient
 						</Link>
 					</div>
 				</div>
@@ -39,4 +39,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(MyPatients);
+export default connect(mapStateToProps)(Patients);
