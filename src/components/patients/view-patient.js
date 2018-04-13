@@ -99,9 +99,27 @@ const ViewPatient = props => {
 											.groupNumber
 									}
 								</h6>
+								<br />
+								<h6 className="is-size-6">
+									<strong>Documents: </strong>
+								</h6>
+								<ul>
+									{selectedPatient.documents.map(
+										(doc, index) => (
+											<li key={index}>
+												<a
+													href={`${
+														routes.files
+													}/${doc}`}
+													target="_blank"
+												>{`${doc} `}</a>
+											</li>
+										),
+									)}
+								</ul>
 							</div>
 						</div>
-						<div className="buttons is-centered create-patient">
+						<div className="buttons is-centered">
 							<Link
 								className="button is-primary"
 								to={`/patients/${selectedPatient._id}/edit`}

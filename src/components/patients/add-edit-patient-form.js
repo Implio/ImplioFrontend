@@ -51,11 +51,23 @@ class AddEditPatientForm extends Component {
 			isUploading: false,
 			fields: {
 				picture: props.initialValues.picture,
+				documents: props.initialValues.documents,
 			},
 		};
 	}
 
-	handleFile(e) {
+	handleRemoveDocument(index) {
+		this.setState({
+			fields: {
+				...this.state.fields,
+				documents: this.state.fields.documents.filter(
+					(doc, i) => index !== i,
+				),
+			},
+		});
+	}
+
+	handleImage(e) {
 		const file = e.target.files[0];
 		const formData = new FormData();
 		formData.append('file', file);
@@ -68,6 +80,27 @@ class AddEditPatientForm extends Component {
 				fields: {
 					...this.state.fields,
 					picture: action.payload.data.filename,
+				},
+			});
+		});
+	}
+
+	handleDocument(e) {
+		const file = e.target.files[0];
+		const formData = new FormData();
+		formData.append('file', file);
+
+		this.setState({ isUploadingFile: true });
+
+		this.props.uploadFile(formData).then(action => {
+			this.setState({
+				isUploadingFile: false,
+				fields: {
+					...this.state.fields,
+					documents: [
+						...this.state.fields.documents,
+						action.payload.data.filename,
+					],
 				},
 			});
 		});
@@ -156,7 +189,7 @@ class AddEditPatientForm extends Component {
 										className="file-input"
 										type="file"
 										accept=".jpg, .png, .jpeg"
-										onChange={this.handleFile.bind(this)}
+										onChange={this.handleImage.bind(this)}
 									/>
 									Upload Picture
 								</a>
@@ -207,6 +240,40 @@ class AddEditPatientForm extends Component {
 								/>
 							</div>
 						</div>
+					</div>
+				</div>
+				<h6 className="is-size-6">Documents</h6>
+				<ul>
+					{this.state.fields.documents.map((doc, index) => (
+						<li key={index}>
+							<a
+								href={`${routes.files}/${doc}`}
+								target="_blank"
+							>{`${doc} `}</a>
+							<a
+								className="has-text-danger"
+								onClick={() => this.handleRemoveDocument(index)}
+							>
+								X
+							</a>
+						</li>
+					))}
+				</ul>
+				<br />
+				<div className="field">
+					<div className="control">
+						<a
+							className={`button is-primary ${
+								this.state.isUploadingFile ? 'is-loading' : ''
+							}`}
+						>
+							<input
+								className="file-input"
+								type="file"
+								onChange={this.handleDocument.bind(this)}
+							/>
+							Upload Document
+						</a>
 					</div>
 				</div>
 				<button
