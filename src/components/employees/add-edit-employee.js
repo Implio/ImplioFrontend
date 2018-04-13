@@ -10,9 +10,10 @@ import AddEditEmployeeForm from './add-edit-employee-form';
 
 class AddEditEmployee extends Component {
 	handleFormSubmit(values) {
-		console.log(values);
-
-		const employee = values;
+		const employee = {
+			...values,
+			roomNumber: `${values.roomType}${values.roomNumber}`,
+		};
 
 		if (!this.props.match.params.id)
 			return this.props
@@ -39,6 +40,8 @@ class AddEditEmployee extends Component {
 			initialValues = {
 				...employee,
 				dob: moment(employee.dob).format('MM-DD-YYYY'),
+				roomType: employee.roomNumber[0],
+				roomNumber: employee.roomNumber.slice(1),
 			};
 		}
 

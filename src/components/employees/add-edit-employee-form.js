@@ -165,6 +165,25 @@ class AddEditEmployeeForm extends Component {
 								/>
 							</div>
 						</div>
+						<div className="field">
+							<label className="is-size-7">Room Type:</label>
+							<div className="control">
+								<div className="select">
+									<Field name="roomType" component="select">
+										<option value="D">
+											Doctors Office
+										</option>
+										<option value="S">
+											Specialization
+										</option>
+										<option value="E">Emergency</option>
+										<option value="S">Surgery</option>
+										<option value="N">Nurse Station</option>
+										<option value="M">Miscellaneous</option>
+									</Field>
+								</div>
+							</div>
+						</div>
 						<div className="field is-horizontal">
 							<div className="field-body">
 								<Field
