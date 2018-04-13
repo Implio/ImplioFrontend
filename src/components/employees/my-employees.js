@@ -13,14 +13,18 @@ class MyEmployees extends Component {
 	}
 
 	render() {
-		if (!this.props.employeeList) return <Loader />;
+		if (!this.props.employeeList || !this.props.me) return <Loader />;
 
 		return (
 			<section className="section">
 				<div className="container has-text-centered">
 					<h3 className="title is-3">My Employees</h3>
 
-					{this.renderEmployees(this.props.employeeList)}
+					{this.renderEmployees(
+						this.props.employeeList.filter(
+							employee => employee.managerId === this.props.me._id
+						)
+					)}
 
 					<div className="buttons is-centered create-patient">
 						<Link
@@ -38,7 +42,8 @@ class MyEmployees extends Component {
 
 function mapStateToProps(state) {
 	return {
-		employeeList: state.users.list
+		employeeList: state.users.list,
+		me: state.users.me
 	};
 }
 

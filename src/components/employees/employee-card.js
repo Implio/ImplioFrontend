@@ -30,7 +30,7 @@ const EmployeeCard = props => {
 						{props.employee.title}
 						<br />
 						<strong>Room: </strong>
-						{props.employee.roomNumber}
+						{props.employee.room}
 					</p>
 				</div>
 			</div>
