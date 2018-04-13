@@ -12,6 +12,7 @@ class AddEditPatient extends Component {
 	handleFormSubmit(values) {
 		const patient = {
 			...values,
+			roomNumber: `P${values.roomNumber}`,
 			healthInsurance: {
 				companyName: values.companyName,
 				memberName: values.memberName,

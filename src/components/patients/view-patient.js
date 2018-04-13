@@ -53,8 +53,12 @@ const ViewPatient = props => {
 								</h6>
 								<br />
 								<h6 className="is-size-6">
-									<strong>ID: </strong>
-									{selectedPatient._id}
+									<strong>Room Number: </strong>
+									{selectedPatient.roomNumber}
+								</h6>
+								<h6 className="is-size-6">
+									<strong>Building Number: </strong>
+									{selectedPatient.buildingNumber}
 								</h6>
 								<br />
 								<h6 className="is-size-6">
