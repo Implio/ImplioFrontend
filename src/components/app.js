@@ -10,6 +10,7 @@ import LoginPage from './login/login';
 import Patients from './patients/patients';
 import AddEditPatient from './patients/add-edit-patient';
 import ViewPatient from './patients/view-patient';
+import Messages from './messages/messages';
 
 import Employees from './employees/employees';
 import ViewEmployee from './employees/view-employee';
@@ -68,6 +69,8 @@ class App extends Component {
 						/>
 						<Route path="/employees/:id" component={ViewEmployee} />
 						<Route path="/employees" component={Employees} />
+
+						<Route path="/messages" component={Messages} />
 
 						<Route
 							path="/dashboard"

@@ -2,10 +2,12 @@
 @import 'login/styles';
 @import 'patients/styles';
 @import 'procedures/styles';
+@import 'messages/styles';
 
 html,
 body,
-.root {
+.root,
+.root > div {
 	height: 100%;
 	background-color: $primary-light;
 }
@@ -55,6 +57,21 @@ a:hover > .card {
 
 .rbc-today {
 	background-color: $primary-light;
+
+.has-background-white {
+	background-color: $white;
+}
+
+.has-background-primary {
+	background-color: $primary;
+}
+
+.is-fullheight {
+	height: 100%;
+}
+
+.has-padding {
+	padding: 15px;
 }
 
 .has-no-text-decoration {
