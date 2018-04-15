@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import ProcedureCard from './procedure-card';
 
-class PatientHistory extends Component {
+class Procedures extends Component {
 	render() {
 		return (
 			<section className="section">
@@ -25,4 +25,4 @@ class PatientHistory extends Component {
 	}
 }
 
-export default PatientHistory;
+export default Procedures;

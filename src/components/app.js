@@ -10,11 +10,12 @@ import LoginPage from './login/login';
 import Patients from './patients/patients';
 import AddEditPatient from './patients/add-edit-patient';
 import ViewPatient from './patients/view-patient';
-import PatientHistory from './patients/patient-history';
 
 import Employees from './employees/employees';
 import ViewEmployee from './employees/view-employee';
 import AddEditEmployee from './employees/add-edit-employee';
+
+import Procedures from './procedures/procedures';
 
 class App extends Component {
 	constructor(props) {
@@ -38,7 +39,7 @@ class App extends Component {
 						/>
 						<Route
 							path="/patients/:id/history"
-							component={PatientHistory}
+							component={Procedures}
 						/>
 						<Route
 							path="/patients/:id/edit"
