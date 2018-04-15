@@ -7,7 +7,7 @@ export const Input = ({
 	type,
 	meta: { touched, error },
 }) => (
-	<div className="field">
+	<div classNameName="field">
 		<div className="control">
 			<label className="is-size-7">{label}</label>
 			<input
@@ -37,4 +37,11 @@ export const Select = ({ input, options, label, meta: { touched, error } }) => (
 			{touched && error && <p className="help is-danger">{error}</p>}
 		</div>
 	</div>
+);
+
+export const Checkbox = ({ input, label }) => (
+	<label className="checkbox">
+		<input {...input} type="checkbox" />
+		{label}
+	</label>
 );
