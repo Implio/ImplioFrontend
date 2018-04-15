@@ -18,9 +18,22 @@ class Patients extends Component {
 		return (
 			<section className="section">
 				<div className="container has-text-centered">
-					<h3 className="title is-3">Patients</h3>
+					<h3 className="title is-3">Active Patients</h3>
+					{this.renderPatients(
+						this.props.patientsList.filter(
+							patient => patient.active,
+						),
+					)}
 
-					{this.renderPatients(this.props.patientsList)}
+					<br />
+					<br />
+
+					<h3 className="title is-3">Inactive Patients</h3>
+					{this.renderPatients(
+						this.props.patientsList.filter(
+							patient => !patient.active,
+						),
+					)}
 
 					<div className="buttons is-centered create-patient">
 						<Link className="button is-primary" to="/patients/new">

@@ -19,13 +19,19 @@ const validate = values => {
 		memberId: null,
 		primaryPhysician: null,
 		groupNumber: null,
-		roomNumber: null,
-		buildingNumber: null,
 	};
 
 	Object.keys(errors).forEach(
 		key => (errors[key] = !values[key] ? 'Required' : null),
 	);
+
+	if (values.active) {
+		if (!values.roomNumber)
+			errors.roomNumber = 'Required if patient is active';
+
+		if (!values.buildingNumber)
+			errors.buildingNumber = 'Required if patient is active';
+	}
 
 	return errors;
 };
@@ -251,6 +257,15 @@ class AddEditPatientForm extends Component {
 				<h6 className="is-size-6">Hospital Information</h6>
 				<div className="columns">
 					<div className="column is-half">
+						<label className="checkbox is-size-7">
+							<Field
+								name="active"
+								id="active"
+								component="input"
+								type="checkbox"
+							/>
+							{'  '}Active
+						</label>
 						<div className="field is-horizontal">
 							<div className="field-body">
 								<Field

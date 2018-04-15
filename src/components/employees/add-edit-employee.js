@@ -72,7 +72,9 @@ class AddEditEmployee extends Component {
 
 function mapStateToProps(state) {
 	return {
-		managers: state.users.managers,
+		managers: state.users.list
+			? state.users.list.filter(user => user.isAdmin)
+			: [],
 		employeesList: state.users.list,
 		me: state.users.me,
 	};

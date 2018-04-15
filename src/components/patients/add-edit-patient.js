@@ -12,7 +12,8 @@ class AddEditPatient extends Component {
 	handleFormSubmit(values) {
 		const patient = {
 			...values,
-			roomNumber: `P${values.roomNumber}`,
+			roomNumber: values.active ? `P${values.roomNumber}` : null,
+			buildingNumber: values.active ? values.buildingNumber : null,
 			healthInsurance: {
 				companyName: values.companyName,
 				memberName: values.memberName,
@@ -47,7 +48,9 @@ class AddEditPatient extends Component {
 				...patient,
 				...patient.healthInsurance,
 				dob: moment(patient.dob).format('MM-DD-YYYY'),
-				roomNumber: patient.roomNumber.slice(1),
+				roomNumber: patient.roomNumber
+					? patient.roomNumber.slice(1)
+					: '',
 			};
 		}
 
@@ -78,7 +81,9 @@ class AddEditPatient extends Component {
 function mapStateToProps(state) {
 	return {
 		patientsList: state.patients.list,
-		doctors: state.users.doctors,
+		doctors: state.users.list
+			? state.users.list.filter(user => user.type === 'doctor')
+			: [],
 	};
 }
 

@@ -6,8 +6,6 @@ export default function(state = {}, action) {
 			return {
 				...state,
 				list: action.payload.data,
-				managers: action.payload.data.filter(user => user.isAdmin),
-				doctors: action.payload.data.filter(user => user.isDoctor),
 			};
 		case FETCH_ME:
 			return { ...state, me: action.payload.data };
@@ -15,29 +13,11 @@ export default function(state = {}, action) {
 			return {
 				...state,
 				list: [...state.list, action.payload.data],
-				managers: action.payload.data.isAdmin
-					? [...state.managers, action.payload.data]
-					: state.managers,
-				doctors: action.payload.data.isDoctor
-					? [...state.doctors, action.payload.data]
-					: state.doctors,
 			};
 		case EDIT_USER:
 			return {
 				...state,
 				list: state.list.map(
-					user =>
-						user._id === action.payload.data._id
-							? action.payload.data
-							: user,
-				),
-				managers: state.managers.map(
-					user =>
-						user._id === action.payload.data._id
-							? action.payload.data
-							: user,
-				),
-				doctors: state.doctors.map(
 					user =>
 						user._id === action.payload.data._id
 							? action.payload.data

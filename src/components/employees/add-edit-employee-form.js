@@ -87,11 +87,12 @@ class AddEditEmployeeForm extends Component {
 						component={Select}
 					/>
 					<Field
-						name="isDoctor"
-						label="Doctor"
+						name="type"
+						label="Type"
 						options={[
-							{ value: false, label: 'No' },
-							{ value: true, label: 'Yes' },
+							{ value: 'doctor', label: 'Doctor' },
+							{ value: 'nurse', label: 'Nurse' },
+							{ value: 'other', label: 'Other' },
 						]}
 						component={Select}
 					/>

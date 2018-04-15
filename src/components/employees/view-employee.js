@@ -18,9 +18,9 @@ const ViewEmployee = props => {
 
 	if (!selectedEmployee) return <Redirect to="/employees" />;
 
-	const manager = props.managers.find(
-		m => m._id === selectedEmployee.managerId,
-	);
+	const manager = props.managers
+		.filter(user => user.isAdmin)
+		.find(m => m._id === selectedEmployee.managerId);
 
 	const events = [
 		{
@@ -80,9 +80,9 @@ const ViewEmployee = props => {
 									<strong>Title: </strong>
 									{selectedEmployee.title}
 								</h6>
-								<h6 className="is-size-6">
-									<strong>Doctor: </strong>
-									{selectedEmployee.isDoctor ? 'Yes' : 'No'}
+								<h6 className="is-size-6 is-capitalized">
+									<strong>Type: </strong>
+									{selectedEmployee.type}
 								</h6>
 								<h6 className="is-size-6">
 									<strong>Date of Birth: </strong>
@@ -145,7 +145,9 @@ const ViewEmployee = props => {
 function mapStateToProps(state) {
 	return {
 		employeesList: state.users.list,
-		managers: state.users.managers,
+		managers: state.users.list
+			? state.users.list.filter(user => user.isAdmin)
+			: [],
 	};
 }
 

@@ -61,13 +61,21 @@ const ViewPatient = props => {
 								</h6>
 								<br />
 								<h6 className="is-size-6">
-									<strong>Room Number: </strong>
-									{selectedPatient.roomNumber}
+									<strong>Active: </strong>
+									{selectedPatient.active ? 'Yes' : 'No'}
 								</h6>
-								<h6 className="is-size-6">
-									<strong>Building Number: </strong>
-									{selectedPatient.buildingNumber}
-								</h6>
+								{selectedPatient.roomNumber ? (
+									<h6 className="is-size-6">
+										<strong>Room Number: </strong>
+										{selectedPatient.roomNumber}
+									</h6>
+								) : null}
+								{selectedPatient.buildingNumber ? (
+									<h6 className="is-size-6">
+										<strong>Building Number: </strong>
+										{selectedPatient.buildingNumber}
+									</h6>
+								) : null}
 								<br />
 								<h6 className="is-size-6">
 									<strong>Phone Number: </strong>
@@ -178,7 +186,9 @@ const ViewPatient = props => {
 function mapStateToProps(state) {
 	return {
 		patientsList: state.patients.list,
-		doctors: state.users.doctors,
+		doctors: state.users.list
+			? state.users.list.filter(user => user.type === 'doctor')
+			: [],
 	};
 }
 
