@@ -50,12 +50,17 @@ export function fetchAll(token) {
 			.all([
 				axios.get(`${routes.apiRoot}/users`),
 				axios.get(`${routes.apiRoot}/patients`),
+				axios.get(`${routes.apiRoot}/procedures`),
 				axios.get(`${routes.apiRoot}/me`),
 			])
 			.then(
-				axios.spread((users, patients, me) => {
+				axios.spread((users, patients, procedures, me) => {
 					dispatch({ type: types.FETCH_USERS, payload: users });
 					dispatch({ type: types.FETCH_PATIENTS, payload: patients });
+					dispatch({
+						type: types.FETCH_PROCEDURES,
+						payload: procedures,
+					});
 					dispatch({ type: types.FETCH_ME, payload: me });
 				}),
 			);
@@ -99,6 +104,23 @@ export function editEmployee(employee) {
 		payload: axios.patch(
 			`${routes.apiRoot}/users/${employee._id}`,
 			employee,
+		),
+	};
+}
+
+export function addProcedure(procedure) {
+	return {
+		type: types.ADD_PROCEDURE,
+		payload: axios.post(`${routes.apiRoot}/procedures`, procedure),
+	};
+}
+
+export function editProcedure(procedure) {
+	return {
+		type: types.EDIT_PROCEDURE,
+		payload: axios.patch(
+			`${routes.apiRoot}/procedures/${procedure._id}`,
+			procedure,
 		),
 	};
 }
