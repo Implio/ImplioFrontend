@@ -64,6 +64,14 @@ const ViewPatient = props => {
 									<strong>Active: </strong>
 									{selectedPatient.active ? 'Yes' : 'No'}
 								</h6>
+								{selectedPatient.activeSince ? (
+									<h6 className="is-size-6">
+										<strong>Active Since: </strong>
+										{moment(
+											selectedPatient.activeSince,
+										).format('lll')}
+									</h6>
+								) : null}
 								{selectedPatient.roomNumber ? (
 									<h6 className="is-size-6">
 										<strong>Room Number: </strong>
