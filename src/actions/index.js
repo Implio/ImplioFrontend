@@ -50,17 +50,19 @@ export function fetchAll(token) {
 			.all([
 				axios.get(`${routes.apiRoot}/users`),
 				axios.get(`${routes.apiRoot}/patients`),
+				axios.get(`${routes.apiRoot}/messages`),
 				axios.get(`${routes.apiRoot}/procedures`),
 				axios.get(`${routes.apiRoot}/me`),
 			])
 			.then(
-				axios.spread((users, patients, procedures, me) => {
+				axios.spread((users, patients, procedures, messages, me) => {
 					dispatch({ type: types.FETCH_USERS, payload: users });
 					dispatch({ type: types.FETCH_PATIENTS, payload: patients });
 					dispatch({
 						type: types.FETCH_PROCEDURES,
 						payload: procedures,
 					});
+					dispatch({ type: types.FETCH_MESSAGES, payload: messages });
 					dispatch({ type: types.FETCH_ME, payload: me });
 				}),
 			);
@@ -88,6 +90,13 @@ export function editPatient(patient) {
 			`${routes.apiRoot}/patients/${patient._id}`,
 			patient,
 		),
+	};
+}
+
+export function addMessage(message) {
+	return {
+		type: types.ADD_MESSAGE,
+		payload: axios.post(`${routes.apiRoot}/messages`, message),
 	};
 }
 

@@ -3,3 +3,25 @@
 	height: 5px;
 	background-color: $primary-light;
 }
+
+.user-message {
+	border-bottom: 2px solid $primary-light;
+}
+
+.message-user-image {
+	border-radius: 100% !important;
+}
+
+.employee-message-tab {
+	&:hover {
+		background-color: $primary-dark;
+	}
+
+	cursor: pointer;
+	margin: 0 !important;
+	padding: 1rem;
+}
+
+.employee-message-tab.is-active {
+	background-color: $white;
+}
