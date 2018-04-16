@@ -50,8 +50,8 @@ export function fetchAll(token) {
 			.all([
 				axios.get(`${routes.apiRoot}/users`),
 				axios.get(`${routes.apiRoot}/patients`),
-				axios.get(`${routes.apiRoot}/messages`),
 				axios.get(`${routes.apiRoot}/procedures`),
+				axios.get(`${routes.apiRoot}/messages`),
 				axios.get(`${routes.apiRoot}/me`),
 			])
 			.then(
