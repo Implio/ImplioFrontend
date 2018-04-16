@@ -15,6 +15,7 @@ import Messages from './messages/messages';
 import Employees from './employees/employees';
 import ViewEmployee from './employees/view-employee';
 import AddEditEmployee from './employees/add-edit-employee';
+import LogHours from './employees/log-hours';
 
 import Procedures from './procedures/procedures';
 import AddEditProcedure from './procedures/add-edit-procedure';
@@ -75,6 +76,8 @@ class App extends Component {
 						/>
 						<Route path="/employees/:id" component={ViewEmployee} />
 						<Route path="/employees" component={Employees} />
+
+						<Route path="/log-hours" component={LogHours} />
 
 						<Route path="/messages" component={Messages} />
 

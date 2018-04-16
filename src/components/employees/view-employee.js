@@ -22,14 +22,11 @@ const ViewEmployee = props => {
 		.filter(user => user.isAdmin)
 		.find(m => m._id === selectedEmployee.managerId);
 
-	const events = [
-		{
-			title: 'All Day Event very long title',
-			allDay: true,
-			start: new Date(),
-			end: new Date(),
-		},
-	];
+	const events = selectedEmployee.hours.map(h => ({
+		title: h.title,
+		start: new Date(h.start),
+		end: new Date(h.end),
+	}));
 
 	BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 	const allViews = Object.keys(BigCalendar.Views).map(

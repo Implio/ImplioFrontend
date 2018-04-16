@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import * as actions from '../../actions';
+import Loader from '../loader';
 
 import logoIcon from '../../img/logo_icon.png';
 
 class Nav extends Component {
-	renderEmployees(me) {
-		if (!me || !me.isAdmin) return null;
+	renderEmployees(isAdmin) {
+		if (!isAdmin) return null;
 
 		return (
 			<NavLink
@@ -22,6 +23,8 @@ class Nav extends Component {
 	}
 
 	render() {
+		if (!this.props.me) return <Loader />;
+
 		return (
 			<nav
 				className="navbar has-shadow"
@@ -54,7 +57,7 @@ class Nav extends Component {
 							Patients
 						</NavLink>
 
-						{this.renderEmployees(this.props.me)}
+						{this.renderEmployees(this.props.me.isAdmin)}
 						<NavLink
 							to="/messages"
 							className="navbar-item is-tab"
@@ -73,11 +76,11 @@ class Nav extends Component {
 								>
 									Log Hours
 								</NavLink>
-								<NavLink to="/schedule" className="navbar-item">
-									Schedule
-								</NavLink>
-								<NavLink to="/payments" className="navbar-item">
-									Payments
+								<NavLink
+									to={`/employees/${this.props.me._id}`}
+									className="navbar-item"
+								>
+									My Account
 								</NavLink>
 							</div>
 						</div>

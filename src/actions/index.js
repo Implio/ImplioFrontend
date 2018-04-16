@@ -133,3 +133,10 @@ export function editProcedure(procedure) {
 		),
 	};
 }
+
+export function addHours(hours) {
+	return {
+		type: types.EDIT_USER,
+		payload: axios.post(`${routes.apiRoot}/hours`, hours),
+	};
+}
