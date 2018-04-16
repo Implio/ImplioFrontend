@@ -183,6 +183,15 @@ const ViewPatient = props => {
 								</span>
 								<span>Medical History</span>
 							</Link>
+							<Link
+								className="button is-primary"
+								to={`/patients/${selectedPatient._id}/bill`}
+							>
+								<span className="icon is-small">
+									<i className="fas fa-money-bill-alt" />
+								</span>
+								<span>Current Bill</span>
+							</Link>
 						</div>
 					</div>
 				</div>

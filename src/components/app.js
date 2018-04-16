@@ -19,6 +19,8 @@ import AddEditEmployee from './employees/add-edit-employee';
 import Procedures from './procedures/procedures';
 import AddEditProcedure from './procedures/add-edit-procedure';
 
+import PatientBill from './bills/patient-bill';
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -51,6 +53,10 @@ class App extends Component {
 						<Route
 							path="/patients/:id/history"
 							component={Procedures}
+						/>
+						<Route
+							path="/patients/:id/bill"
+							component={PatientBill}
 						/>
 						<Route
 							path="/patients/:id/edit"

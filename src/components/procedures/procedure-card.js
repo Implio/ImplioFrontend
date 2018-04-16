@@ -31,7 +31,7 @@ const ProcedureCard = props => {
 				</div>
 				<br />
 				<div className="columns">
-					<div className="column is-three-quarters">
+					<div className="column is-three-fifths">
 						<p>
 							<strong>Description: </strong>
 							<br />
@@ -39,7 +39,7 @@ const ProcedureCard = props => {
 						</p>
 					</div>
 					<div className="column">
-						<p>
+						<p className="is-capitalized">
 							<strong>Doctor: </strong>{' '}
 							{props.procedure.doctorName}
 							<br />

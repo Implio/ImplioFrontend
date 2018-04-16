@@ -115,6 +115,15 @@ class AddEditProcedureForm extends Component {
 					</div>
 				</div>
 
+				<div className="field is-grouped">
+					<Field
+						name="date"
+						label="Date"
+						component={Input}
+						placeholder="MM-DD-YYYY"
+					/>
+				</div>
+
 				<Field
 					name="description"
 					label="Description"
