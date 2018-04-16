@@ -87,6 +87,12 @@ const ViewEmployee = props => {
 										'MM-DD-YYYY',
 									)}
 								</h6>
+								{selectedEmployee.type === 'doctor' ? (
+									<h6 className="is-size-6 is-capitalized">
+										<strong>Monthly Salary: </strong>
+										${selectedEmployee.salary.toLocaleString()}
+									</h6>
+								) : null}
 								<br />
 								<h6 className="is-size-6">
 									<strong>Room Number: </strong>

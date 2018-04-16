@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 
 import routes from '../../../config/routes';
 import { Input, Select } from '../redux-fields';
@@ -14,6 +15,7 @@ const validate = values => {
 		social: null,
 		title: null,
 		type: null,
+		roomType: null,
 		roomNumber: null,
 		buildingNumber: null,
 	};
@@ -25,6 +27,9 @@ const validate = values => {
 	if (values.password !== values.confirmPassword) {
 		errors.confirmPassword = 'Passwords do not match';
 	}
+
+	if (values.type === 'doctor' && !values.salary)
+		errors.salary = 'Salary is required for doctors';
 
 	return errors;
 };
@@ -91,12 +96,22 @@ class AddEditEmployeeForm extends Component {
 						name="type"
 						label="Type"
 						options={[
+							{ value: '', label: 'No Type' },
 							{ value: 'doctor', label: 'Doctor' },
 							{ value: 'nurse', label: 'Nurse' },
 							{ value: 'other', label: 'Other' },
 						]}
 						component={Select}
 					/>
+					{this.props.employeeForm &&
+					this.props.employeeForm.values &&
+					this.props.employeeForm.values.type === 'doctor' ? (
+						<Field
+							name="salary"
+							label="Monthly Salary"
+							component={Input}
+						/>
+					) : null}
 				</div>
 			</div>
 		);
@@ -151,25 +166,20 @@ class AddEditEmployeeForm extends Component {
 								/>
 							</div>
 						</div>
-						<div className="field">
-							<label className="is-size-7">Room Type:</label>
-							<div className="control">
-								<div className="select">
-									<Field name="roomType" component="select">
-										<option value="D">
-											Doctors Office
-										</option>
-										<option value="S">
-											Specialization
-										</option>
-										<option value="E">Emergency</option>
-										<option value="S">Surgery</option>
-										<option value="N">Nurse Station</option>
-										<option value="M">Miscellaneous</option>
-									</Field>
-								</div>
-							</div>
-						</div>
+						<Field
+							name="roomType"
+							label="Room Type"
+							options={[
+								{ value: '', label: '' },
+								{ value: 'D', label: 'Doctors Office' },
+								{ value: 'S', label: 'Specialization' },
+								{ value: 'E', label: 'Emergency' },
+								{ value: 'S', label: 'Surgery' },
+								{ value: 'N', label: 'Nurse Station' },
+								{ value: 'M', label: 'Miscellaneous' },
+							]}
+							component={Select}
+						/>
 						<div className="field is-horizontal">
 							<div className="field-body">
 								<Field
@@ -255,9 +265,15 @@ class AddEditEmployeeForm extends Component {
 	}
 }
 
+function mapStateToProps(state) {
+	return {
+		employeeForm: state.form.employee,
+	};
+}
+
 AddEditEmployeeForm = reduxForm({
 	form: 'employee',
 	validate,
 })(AddEditEmployeeForm);
 
-export default AddEditEmployeeForm;
+export default connect(mapStateToProps)(AddEditEmployeeForm);
