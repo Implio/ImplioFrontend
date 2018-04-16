@@ -9,6 +9,9 @@ const MessagesHeader = props => (
 						<input
 							className="input has-background-white"
 							type="text"
+							onChange={e => {
+								props.handleSearch(e.target.value);
+							}}
 						/>
 						<span className="icon is-small is-right">
 							<i className="fas fa-search fa-xs" />

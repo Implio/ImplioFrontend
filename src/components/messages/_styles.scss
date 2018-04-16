@@ -25,3 +25,11 @@
 .employee-message-tab.is-active {
 	background-color: $white;
 }
+
+.full-width {
+	width: -webkit-fill-available;
+}
+
+.fixed-height {
+	height: 80.8%;
+}

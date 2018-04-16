@@ -103,3 +103,13 @@ a:hover > .card {
 .has-cursor-pointer {
 	cursor: pointer;
 }
+
+.stay-bottom {
+	position: fixed;
+	bottom: 0;
+	width: 80%;
+}
+
+.overflow-scroll {
+	overflow-y: scroll;
+}

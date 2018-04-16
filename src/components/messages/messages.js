@@ -6,21 +6,27 @@ import Loader from '../loader';
 
 import MessagesHeader from './messages-header';
 import EmployeeMessageCard from './employee-message-card';
-import EmployeeMessage from './employee-message';
-import MessagingBar from './messaging-bar';
+import Conversation from './conversation';
 
 class Messages extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			activeUser: null
+			activeUser: null,
+			search: ''
 		};
 	}
 
-	onEmployeeMessage(id) {
+	selectEmployee(id) {
 		this.setState({
 			activeUser: this.props.usersList.find(user => user._id === id)
+		});
+	}
+
+	handleSearch(search) {
+		this.setState({
+			search
 		});
 	}
 
@@ -34,24 +40,31 @@ class Messages extends Component {
 					this.state.activeUser._id === user._id
 				}
 				onClick={() => {
-					this.onEmployeeMessage(user._id);
+					this.selectEmployee(user._id);
 				}}
 			/>
 		));
 	}
 
-	renderMessages(messages) {
-		return messages.map(message => (
-			<EmployeeMessage key={message._id} message={message} />
-		));
-	}
-
 	render() {
-		if (!this.props.usersList || !this.props.messagesList)
+		if (!this.props.usersList || !this.props.messagesList || !this.props.me)
 			return <Loader />;
+
+		const messages = this.props.messagesList.map(m => {
+			const fromUser = this.props.usersList.find(
+				u => u._id === m.fromUserId
+			);
+
+			return {
+				...m,
+				fromName: `${fromUser.firstName} ${fromUser.lastName}`
+			};
+		});
+
 		return (
-			<div className="is-fullheight">
+			<div className="fixed-height">
 				<MessagesHeader
+					handleSearch={this.handleSearch.bind(this)}
 					name={
 						this.state.activeUser
 							? `${this.state.activeUser.firstName} ${
@@ -62,17 +75,31 @@ class Messages extends Component {
 				/>
 				<div className="messages-line" />
 
-				<div className="columns is-gapless is-marginless is-fullheight">
+				<div className="columns is-fullheight is-gapless is-marginless">
 					<div className="column is-one-fifth has-background-primary">
-						<section />
-
-						{this.renderEmployees(this.props.usersList)}
+						{this.renderEmployees(
+							this.props.usersList.filter(
+								u =>
+									this.state.search === ''
+										? u._id !== this.props.me._id
+										: u._id !== this.props.me._id &&
+										  u.firstName
+												.toUpperCase()
+												.includes(
+													this.state.search.toUpperCase()
+												)
+							)
+						)}
 					</div>
 
-					<div className="column has-background-white">
-						<section />
-						{this.renderMessages(this.props.messagesList)}
-						<MessagingBar />
+					<div className="column overflow-scroll has-background-white">
+						{this.state.activeUser ? (
+							<Conversation
+								messagesList={messages}
+								activeUser={this.state.activeUser}
+								addMessage={this.props.addMessage}
+							/>
+						) : null}
 					</div>
 				</div>
 			</div>
@@ -83,7 +110,8 @@ class Messages extends Component {
 function mapStateToProps(state) {
 	return {
 		usersList: state.users.list,
-		messagesList: state.messages.list
+		messagesList: state.messages.list,
+		me: state.users.me
 	};
 }
 
