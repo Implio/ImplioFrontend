@@ -39,7 +39,6 @@ class AddEditEmployee extends Component {
 
 			initialValues = {
 				...employee,
-				dob: moment(employee.dob).format('MM-DD-YYYY'),
 				roomType: employee.roomNumber[0],
 				roomNumber: employee.roomNumber.slice(1),
 			};

@@ -13,6 +13,7 @@ const validate = values => {
 		dob: null,
 		social: null,
 		title: null,
+		type: null,
 		roomNumber: null,
 		buildingNumber: null,
 	};
