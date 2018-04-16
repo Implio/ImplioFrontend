@@ -124,6 +124,7 @@ const ViewEmployee = props => {
 								<span>Edit Employee</span>
 							</Link>
 						</div>
+						<h4 className="title is-4">Hours Logged</h4>
 						<div className="calendar-container">
 							<BigCalendar
 								events={events}

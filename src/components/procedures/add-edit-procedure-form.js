@@ -120,7 +120,7 @@ class AddEditProcedureForm extends Component {
 						name="date"
 						label="Date"
 						component={Input}
-						placeholder="MM-DD-YYYY"
+						type="date"
 					/>
 				</div>
 

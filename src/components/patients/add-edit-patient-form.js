@@ -133,6 +133,12 @@ class AddEditPatientForm extends Component {
 							component={Input}
 							label="Address"
 						/>
+						<Field
+							name="dob"
+							component={Input}
+							label="DOB"
+							type="date"
+						/>
 						<div className="field is-horizontal">
 							<div className="field-body">
 								<Field
@@ -140,12 +146,6 @@ class AddEditPatientForm extends Component {
 									component={Input}
 									label="Phone Number"
 									placeholder="(_ _ _) - _ _ _ - _ _ _ _"
-								/>
-								<Field
-									name="dob"
-									component={Input}
-									label="DOB"
-									placeholder="MM-DD-YYYY"
 								/>
 								<Field
 									name="social"

@@ -12,6 +12,8 @@ function renderPatientRoomCharge(patient) {
 
 	const daysWithRoom = moment().diff(moment(patient.activeSince), 'days');
 
+	if (daysWithRoom <= 0) return null;
+
 	return (
 		<tr>
 			<td>Patient Room</td>
@@ -26,6 +28,8 @@ function renderPrimaryPhysicianCharge(patient) {
 
 	const daysWithRoom = moment().diff(moment(patient.activeSince), 'days');
 
+	if (daysWithRoom <= 0) return null;
+
 	return (
 		<tr>
 			<td>Primary Physician</td>
@@ -39,6 +43,8 @@ function renderConsultingPhysicianCharge(patient) {
 	if (!patient.consultingPhysician || !patient.activeSince) return null;
 
 	const daysWithRoom = moment().diff(moment(patient.activeSince), 'days');
+
+	if (daysWithRoom <= 0) return null;
 
 	return (
 		<tr>

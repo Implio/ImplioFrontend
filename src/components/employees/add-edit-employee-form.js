@@ -141,7 +141,7 @@ class AddEditEmployeeForm extends Component {
 									name="dob"
 									component={Input}
 									label="DOB"
-									placeholder="MM-DD-YYYY"
+									type="date"
 								/>
 								<Field
 									name="title"
