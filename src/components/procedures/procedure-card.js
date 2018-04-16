@@ -1,38 +1,70 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+
+import routes from '../../../config/routes';
 
 const ProcedureCard = props => {
 	return (
-		<div className="card">
+		<div className="card procedure-card">
 			<div className="card-content has-text-left">
-				<p>
-					<strong>Procedure Name</strong>
-				</p>
+				<div className="level is-marginless">
+					<div className="level-left">
+						<p>
+							<strong>{props.procedure.procedureName}</strong>
+						</p>
+					</div>
+					<div className="level-right">
+						<div className="buttons">
+							<Link
+								to={`/patients/${
+									props.procedure.patientId
+								}/history/${props.procedure._id}/edit`}
+								className="button is-text has-no-text-decoration"
+							>
+								<span className="icon is-small">
+									<i className="fas fa-edit" />
+								</span>
+							</Link>
+						</div>
+					</div>
+				</div>
 				<br />
 				<div className="columns">
 					<div className="column is-three-quarters">
 						<p>
 							<strong>Description: </strong>
 							<br />
-							Curabitur arcu erat, accumsan id imperdiet et,
-							porttitor at sem. Curabitur aliquet quam id dui
-							posuere blandit. Vestibulum ac diam sit amet quam
-							vehicula elementum sed sit amet dui. Pellentesque in
-							ipsum id orci porta dapibus. Praesent sapien massa,
-							convallis a pellentesque nec, egestas non nisi.
-							Proin eget tortor risus. Cras ultricies ligula sed
-							magna dictum porta. Praesent sapien massa, convallis
-							a pellentesque nec, egestas non nisi. Lorem ipsum
-							dolor sit amet, consectetur adipiscing elit.
+							{props.procedure.description}
 						</p>
 					</div>
 					<div className="column">
 						<p>
-							<strong>Doctor: </strong> Doctor Name
+							<strong>Doctor: </strong>{' '}
+							{props.procedure.doctorName}
 							<br />
-							<strong>Date: </strong> 10/10/13
+							<strong>Date: </strong>{' '}
+							{moment(props.procedure.date).format('lll')}
 							<br />
-							<strong>Category: </strong> Cardiology
+							<strong>Category: </strong>{' '}
+							{props.procedure.category}
 						</p>
+
+						<br />
+
+						<p>
+							<strong>Documents: </strong>
+						</p>
+						<ul>
+							{props.procedure.documents.map((doc, index) => (
+								<li key={index}>
+									<a
+										href={`${routes.files}/${doc}`}
+										target="_blank"
+									>{`${doc} `}</a>
+								</li>
+							))}
+						</ul>
 					</div>
 				</div>
 			</div>

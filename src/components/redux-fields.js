@@ -39,3 +39,21 @@ export const Select = ({ input, options, label, meta: { touched, error } }) => (
 	</div>
 );
 
+export const TextArea = ({
+	input,
+	placeholder,
+	label,
+	meta: { touched, error },
+}) => (
+	<div className="field">
+		<div className="control">
+			<label className="is-size-7">{label}</label>
+			<textarea
+				{...input}
+				className={`textarea ${touched && error ? 'is-danger' : ''}`}
+				placeholder={placeholder}
+			/>
+			{touched && error && <p className="help is-danger">{error}</p>}
+		</div>
+	</div>
+);

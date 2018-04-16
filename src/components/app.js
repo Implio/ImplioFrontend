@@ -16,6 +16,7 @@ import ViewEmployee from './employees/view-employee';
 import AddEditEmployee from './employees/add-edit-employee';
 
 import Procedures from './procedures/procedures';
+import AddEditProcedure from './procedures/add-edit-procedure';
 
 class App extends Component {
 	constructor(props) {
@@ -36,6 +37,15 @@ class App extends Component {
 						<Route
 							path="/patients/new"
 							component={AddEditPatient}
+						/>
+
+						<Route
+							path="/patients/:id/history/:procedureId/edit"
+							component={AddEditProcedure}
+						/>
+						<Route
+							path="/patients/:id/history/new"
+							component={AddEditProcedure}
 						/>
 						<Route
 							path="/patients/:id/history"

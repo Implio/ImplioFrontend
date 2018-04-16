@@ -9,40 +9,41 @@ const EmployeeCard = props => {
 	const { firstName, lastName } = props.employee;
 
 	return (
-		<Link
-			to={`/employees/${props.employee._id}`}
-			className="card patient-card has-text-left"
-		>
-			<div className="card-content">
-				<div className="media">
-					<div className="media-left">
-						<figure className="image is-64x64">
-							<img
-								src={
-									props.employee.picture
-										? `${routes.files}/${
-												props.employee.picture
-										  }`
-										: empty
-								}
-								alt="employee"
-							/>
-						</figure>
+		<Link to={`/employees/${props.employee._id}`}>
+			<div className="card patient-card has-text-left">
+				<div className="card-content">
+					<div className="media">
+						<div className="media-left">
+							<figure className="image is-64x64">
+								<img
+									src={
+										props.employee.picture
+											? `${routes.files}/${
+													props.employee.picture
+											  }`
+											: empty
+									}
+									alt="employee"
+								/>
+							</figure>
+						</div>
+						<div className="media-content">
+							<p className="title is-5">{`${firstName} ${lastName}`}</p>
+							<p className="subtitle is-7">
+								{props.employee.title}
+							</p>
+						</div>
 					</div>
-					<div className="media-content">
-						<p className="title is-5">{`${firstName} ${lastName}`}</p>
-						<p className="subtitle is-7">{props.employee.title}</p>
-					</div>
-				</div>
 
-				<div className="content">
-					<p className="subtitle is-size-7">
-						<strong>Room: </strong>
-						{props.employee.roomNumber}
-						<br />
-						<strong>Building: </strong>
-						{props.employee.buildingNumber}
-					</p>
+					<div className="content">
+						<p className="subtitle is-size-7">
+							<strong>Room: </strong>
+							{props.employee.roomNumber}
+							<br />
+							<strong>Building: </strong>
+							{props.employee.buildingNumber}
+						</p>
+					</div>
 				</div>
 			</div>
 		</Link>

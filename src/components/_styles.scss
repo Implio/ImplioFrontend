@@ -1,6 +1,7 @@
 @import 'nav/styles';
 @import 'login/styles';
 @import 'patients/styles';
+@import 'procedures/styles';
 
 html,
 body,
@@ -24,7 +25,7 @@ body,
 	overflow: unset;
 }
 
-a.card:hover {
+a:hover > .card {
 	background-color: $white-bis;
 }
 
@@ -54,4 +55,8 @@ a.card:hover {
 
 .rbc-today {
 	background-color: $primary-light;
+}
+
+.has-no-text-decoration {
+	text-decoration: none !important;
 }

@@ -9,7 +9,7 @@ export default function(state = {}, action) {
 		case FETCH_PROCEDURES:
 			return { ...state, list: action.payload.data };
 		case ADD_PROCEDURE:
-			return { ...state, list: [...state.list, action.payload.data] };
+			return { ...state, list: [action.payload.data, ...state.list] };
 		case EDIT_PROCEDURE:
 			return {
 				...state,
