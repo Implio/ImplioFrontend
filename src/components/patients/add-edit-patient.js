@@ -47,6 +47,7 @@ class AddEditPatient extends Component {
 			initialValues = {
 				...patient,
 				...patient.healthInsurance,
+				dob: moment(patient.dob).format('YYYY-MM-DD'),
 				roomNumber: patient.roomNumber
 					? patient.roomNumber.slice(1)
 					: '',
