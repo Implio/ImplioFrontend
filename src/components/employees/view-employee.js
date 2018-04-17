@@ -138,7 +138,7 @@ const ViewEmployee = props => {
 								<span className="icon is-small">
 									<i className="fas fa-money-bill-alt" />
 								</span>
-								<span>Current Bill</span>
+								<span>Paycheck</span>
 							</Link>
 						</div>
 
