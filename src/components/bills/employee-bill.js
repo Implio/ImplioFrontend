@@ -11,6 +11,18 @@ function getSum(total, num) {
 	return total + Math.round(num);
 }
 
+function renderByDateBill(employee) {
+	if (employee.type === 'doctor') return null;
+
+	return employee.hours.map(hour => (
+		<tr>
+			<td>{moment(hour.start).format('MM-DD-YYYY')}</td>
+			<td>{`$100 x ${hour.amount} hours`}</td>
+			<td>${100 * hour.amount}</td>
+		</tr>
+	));
+}
+
 function totalBill(employee) {
 	if (employee.type === 'doctor') return employee.salary;
 	if (employee.type === 'other') {
@@ -27,19 +39,17 @@ function totalBill(employee) {
 		return employee.hours[0].amount;
 	}
 
-	return employee;
+	return 0;
 }
 
 const EmployeeBill = props => {
 	if (!props.employeesList) return <Loader />;
 
 	const selectedEmployee = props.employeesList.find(
-		employee => employee._id === props.match.params.id,
+		employee => employee._id === props.match.params.id
 	);
 
 	if (!selectedEmployee) return <Redirect to="/employees" />;
-
-	console.log(totalBill(selectedEmployee));
 
 	return (
 		<section className="section">
@@ -59,10 +69,11 @@ const EmployeeBill = props => {
 								</tr>
 							</thead>
 							<tbody>
+								{renderByDateBill(selectedEmployee)}
 								<tr className="has-text-weight-bold">
 									<td>Total</td>
 									<td />
-									<td>$0</td>
+									<td>${totalBill(selectedEmployee)}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -86,7 +97,7 @@ const EmployeeBill = props => {
 
 function mapStateToProps(state) {
 	return {
-		employeesList: state.users.list,
+		employeesList: state.users.list
 	};
 }
 
