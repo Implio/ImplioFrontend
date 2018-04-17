@@ -13,7 +13,7 @@ const ViewEmployee = props => {
 	if (!props.employeesList || !props.managers) return <Loader />;
 
 	const selectedEmployee = props.employeesList.find(
-		employee => employee._id === props.match.params.id,
+		employee => employee._id === props.match.params.id
 	);
 
 	if (!selectedEmployee) return <Redirect to="/employees" />;
@@ -25,12 +25,12 @@ const ViewEmployee = props => {
 	const events = selectedEmployee.hours.map(h => ({
 		title: `${h.amount} hours${h.shift ? ` - ${h.shift}` : ''}`,
 		start: new Date(h.start),
-		end: new Date(h.end),
+		end: new Date(h.end)
 	}));
 
 	BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 	const allViews = Object.keys(BigCalendar.Views).map(
-		k => BigCalendar.Views[k],
+		k => BigCalendar.Views[k]
 	);
 
 	return (
@@ -84,7 +84,7 @@ const ViewEmployee = props => {
 								<h6 className="is-size-6">
 									<strong>Date of Birth: </strong>
 									{moment(selectedEmployee.dob).format(
-										'MM-DD-YYYY',
+										'MM-DD-YYYY'
 									)}
 								</h6>
 								{selectedEmployee.type === 'doctor' ? (
@@ -119,6 +119,7 @@ const ViewEmployee = props => {
 								</h6>
 							</div>
 						</div>
+
 						<div className="buttons is-centered">
 							<Link
 								className="button is-primary"
@@ -127,9 +128,20 @@ const ViewEmployee = props => {
 								<span className="icon is-small">
 									<i className="fas fa-edit" />
 								</span>
-								<span>Edit Employee</span>
+								<span>Edit</span>
+							</Link>
+
+							<Link
+								className="button is-primary"
+								to={`/employees/${selectedEmployee._id}/bill`}
+							>
+								<span className="icon is-small">
+									<i className="fas fa-money-bill-alt" />
+								</span>
+								<span>Current Bill</span>
 							</Link>
 						</div>
+
 						<h4 className="title is-4">Hours Logged</h4>
 						<div className="calendar-container">
 							<BigCalendar
@@ -151,7 +163,7 @@ function mapStateToProps(state) {
 		employeesList: state.users.list,
 		managers: state.users.list
 			? state.users.list.filter(user => user.isAdmin)
-			: [],
+			: []
 	};
 }
 
