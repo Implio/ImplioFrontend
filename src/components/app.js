@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import Nav from './nav/nav.js';
+import Dashboard from './dashboard/dashboard';
 import LoginPage from './login/login';
 
 import Patients from './patients/patients';
@@ -89,7 +90,7 @@ class App extends Component {
 
 						<Route
 							path="/dashboard"
-							render={() => <div>Dashboard</div>}
+							component={Dashboard}
 						/>
 						<Redirect from="/" to="/dashboard" />
 					</Switch>
