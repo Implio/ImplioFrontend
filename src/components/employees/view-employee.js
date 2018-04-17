@@ -23,7 +23,7 @@ const ViewEmployee = props => {
 		.find(m => m._id === selectedEmployee.managerId);
 
 	const events = selectedEmployee.hours.map(h => ({
-		title: h.title,
+		title: `${h.amount} hours${h.shift ? ` - ${h.shift}` : ''}`,
 		start: new Date(h.start),
 		end: new Date(h.end),
 	}));

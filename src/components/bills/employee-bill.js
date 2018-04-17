@@ -27,7 +27,7 @@ function totalBill(employee) {
 		return employee.hours[0].amount;
 	}
 
-	return 0;
+	return employee;
 }
 
 const EmployeeBill = props => {
