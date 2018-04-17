@@ -47,9 +47,8 @@ class LogHours extends Component {
 		const b = moment(`${values.date}T${values.out}`);
 
 		const hours = {
-			title: `${b.diff(a, 'hours')} hours${
-				values.shift ? `- ${values.shift}` : ''
-			}`,
+			amount: b.diff(a, 'hours'),
+			shift: `${values.shift ? `${values.shift}` : ''}`,
 			start: `${values.date}T${values.in}`,
 			end: `${values.date}T${values.out}`,
 		};
