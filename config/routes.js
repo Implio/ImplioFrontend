@@ -1,4 +1,4 @@
 export default {
-	apiRoot: 'http://avecchi.me:3000',
-	files: 'http://avecchi.me:3000/files',
+	apiRoot: 'http://localhost:3000',
+	files: 'http://localhost:3000/files',
 };
