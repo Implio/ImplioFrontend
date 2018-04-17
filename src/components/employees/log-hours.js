@@ -118,6 +118,7 @@ function mapStateToProps(state) {
 	return {
 		me: state.users.me,
 		initialValues: {
+			shift: '1st Shift',
 			date: moment().format('YYYY-MM-DD'),
 		},
 	};
