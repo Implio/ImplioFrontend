@@ -15,31 +15,36 @@ function renderByDateBill(employee) {
 	if (employee.type === 'doctor') return null;
 
 	return employee.hours.map(hour => (
-		<tr>
-			<td>{moment(hour.start).format('MM-DD-YYYY')}</td>
-			<td>{`$100 x ${hour.amount} hours`}</td>
-			<td>${100 * hour.amount}</td>
+		<tr key={hour._id}>
+			<td>
+				{moment(hour.start).format('L LT')} -{' '}
+				{moment(hour.end).format('LT')}
+			</td>
+			<td>{hour.shift}</td>
+			<td>{`$100 x ${hour.amount} hours ${
+				hour.shift === 'Floating Shift' ? ' + $125' : ''
+			}`}</td>
+			<td>
+				${100 * hour.amount +
+					(hour.shift === 'Floating Shift' ? 125 : 0)}
+			</td>
 		</tr>
 	));
 }
 
 function totalBill(employee) {
 	if (employee.type === 'doctor') return employee.salary;
-	if (employee.type === 'other') {
-		// const totalHours = employee.hours
-		// 	.map(hours => {
-		// 		const a = moment(hours.start);
-		// 		const b = moment(hours.end);
 
-		// 		return b.diff(a, 'hours');
-		// 	})
-		// 	.reduce(getSum, 0);
-		// return totalHours * employee.hours.paid;
+	const totalHours = employee.hours
+		.map(
+			hour =>
+				hour.shift === 'Floating Shift'
+					? hour.amount * 100 + 125
+					: hour.amount * 100
+		)
+		.reduce(getSum, 0);
 
-		return employee.hours[0].amount;
-	}
-
-	return 0;
+	return totalHours;
 }
 
 const EmployeeBill = props => {
@@ -63,7 +68,12 @@ const EmployeeBill = props => {
 						<table className="table is-fullwidth is-striped">
 							<thead>
 								<tr>
-									<th>Charge</th>
+									<th>Date</th>
+									<th>
+										{selectedEmployee.type === 'nurse'
+											? 'Shift'
+											: ''}
+									</th>
 									<th>Amount</th>
 									<th>Total</th>
 								</tr>
@@ -72,6 +82,7 @@ const EmployeeBill = props => {
 								{renderByDateBill(selectedEmployee)}
 								<tr className="has-text-weight-bold">
 									<td>Total</td>
+									<td />
 									<td />
 									<td>${totalBill(selectedEmployee)}</td>
 								</tr>
